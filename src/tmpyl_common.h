@@ -1,6 +1,7 @@
-#ifndef TMPL_PY_C_API_H
-#define TMPL_PY_C_API_H
+#ifndef TMPYL_COMMON_H
+#define TMPYL_COMMON_H
 
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <libtmpl/include/tmpl.h>
 
@@ -33,8 +34,21 @@ typedef struct _tmpyl_Generic_Function_Obj {
 } tmpyl_Generic_Function_Obj;
 
 extern PyObject *
-tmpl_Get_Py_Func_From_C(PyObject *self, PyObject *args,
+tmpl_Get_Py_Func_From_C(PyObject *self,
+                        PyObject *args,
                         tmpyl_Generic_Function_Obj *c_func);
+
+/*  All function wrappers for libtmpl.                                        */
+extern PyObject *tmpyl_abs(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_atan(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_atan_pade(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_atan_maclaurin(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_besselI0(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_besselJ0(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_fresnel_cos(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_fresnel_sin(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_lambertw(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_sinc(PyObject *self, PyObject *args);
 
 #endif
 

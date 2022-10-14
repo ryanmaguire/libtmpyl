@@ -48,11 +48,11 @@ if sys.version_info[0] > 2 and sys.version_info[1] > 5:
     # TMPYL_HAS_NUMPY by setting it to zero.
     try:
         import numpy
-        include=['../../', '../', numpy.get_include()]
+        include = [numpy.get_include()]
         tmpyl_macros=[("TMPYL_HAS_NUMPY", 1)]
     except ModuleNotFoundError:
-        include=['../../', '../']
-        tmpyl_macros=[("TMPYL_HAS_NUMPY", 0)]
+        include = []
+        tmpyl_macros = [("TMPYL_HAS_NUMPY", 0)]
 
 # For older versions, use ImportError.
 else:
@@ -60,25 +60,25 @@ else:
     # Again, check if numpy is available.
     try:
         import numpy
-        include=['../../', '../', numpy.get_include()]
-        tmpyl_macros=[("TMPYL_HAS_NUMPY", 1)]
+        include = [numpy.get_include()]
+        tmpyl_macros = [("TMPYL_HAS_NUMPY", 1)]
     except ImportError:
-        include=['../../', '../']
-        tmpyl_macros=[("TMPYL_HAS_NUMPY", 0)]
+        include = []
+        tmpyl_macros = [("TMPYL_HAS_NUMPY", 0)]
 
 if os.path.isfile("/usr/local/lib/libtmpl.so"):
     libs=['/usr/local/lib']
-elif os.path.isfile("../libtmpl.so") or os.path.isfile("../../libtmpl.lib"):
-    libs=['../']
 else:
     sys.exit("Error: libtmpl file (libtmpl.so or libtmpl.lib) not found.")
 
 # List of files to be compiled for tmpyl.
-source_files = [
-    "src/tmpyl.c",
-    "src/tmpyl_common.c",
-    "src/tmpyl_special_functions.c"
-]
+srclist = []
+
+for file in os.listdir("src/"):
+
+    # Only add .c files.
+    if (file[-1] == "c"):
+        srclist.append("src/%s" % file)
 
 # Optional arguments for the compiler.
 optional_args = []
@@ -90,7 +90,7 @@ setup(name='tmpyl',
       author='Ryan Maguire',
       ext_modules=[
           Extension('tmpyl',
-                    source_files,
+                    srclist,
                     extra_compile_args=optional_args,
                     define_macros=tmpyl_macros,
                     include_dirs=include,

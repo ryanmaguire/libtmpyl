@@ -82,7 +82,7 @@
 #include <libtmpl/include/tmpl.h>
 
 /*  Definition of the generic function object is here.                        */
-#include <libtmpyl/include/tmpyl_common.h>
+#include "tmpyl_common.h"
 
 /*  If numpy is available, we'll need to include the numpy header files.      */
 #if defined(TMPYL_HAS_NUMPY) && TMPYL_HAS_NUMPY == 1

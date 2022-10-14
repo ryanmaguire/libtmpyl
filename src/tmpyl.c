@@ -1,5 +1,5 @@
 /******************************************************************************
- *                                 LICENSE                                    *
+ *                                  LICENSE                                   *
  ******************************************************************************
  *  This file is part of libtmpl.                                             *
  *                                                                            *
@@ -37,14 +37,7 @@
  *          used with the functions from libtmpl. If you do not have numpy,   *
  *          you can still use libtmpl with lists, floats, and ints in Python. *
  ******************************************************************************
- *                            A NOTE ON COMMENTS                              *
- ******************************************************************************
- *  It is anticipated that many users of this code will have experience in    *
- *  either Python or IDL, but not C. Many comments are left to explain as     *
- *  much as possible. Vagueness or unclear code should be reported to:        *
- *  https://github.com/ryanmaguire/libtmpl/issues                             *
- ******************************************************************************
- *  Author:     Ryan Maguire, Dartmouth College                               *
+ *  Author:     Ryan Maguire                                                  *
  *  Date:       August 31, 2021                                               *
  ******************************************************************************
  *                             Revision History                               *
@@ -71,143 +64,34 @@
 #include <numpy/ufuncobject.h>
 #endif
 
-/*  All of the needed Python-to-C tools are defined in these header files.    */
-#include <libtmpyl/include/tmpyl_common.h>
-#include <libtmpyl/include/tmpyl_special_functions.h>
+/*  All of the needed Python-to-C tools are defined here.                     */
+#include "tmpyl_common.h"
+
+/*  The PyMethodDef structs for the functions are in their own header files.  */
+#include "tmpyl_abs_method.h"
+#include "tmpyl_atan_method.h"
+#include "tmpyl_atan_pade_method.h"
+#include "tmpyl_atan_maclaurin_method.h"
+#include "tmpyl_besselI0_method.h"
+#include "tmpyl_besselJ0_method.h"
+#include "tmpyl_fresnel_cos_method.h"
+#include "tmpyl_fresnel_sin_method.h"
+#include "tmpyl_lambertw_method.h"
+#include "tmpyl_sinc_method.h"
 
 /*  All of the methods of the tmpyl module are defined in this array.         */
 static PyMethodDef tmpyl_methods[] =
 {
-    {
-        "besselI0",
-        tmpyl_besselI0,
-        METH_VARARGS,
-        "\r\t"
-        "Function:\n\r\t\t"
-        "tmpyl.besselI0\n\r\t"
-        "Purpose:\n\r\t\t"
-        "Compute the Zeroth Modified Bessel Function of the First Kind (I0)."
-        "\n\r\tArguments\n\r\t\t"
-        "x (numpy.ndarray):\n\r\t\t\t"
-        "Independent variable for I_0(x). Allowed inputs are int,\n\r\t\t\t"
-        "float, complex, list (of ints, floats, and complex),\n\r\t\t\t"
-        "and numpy arrays (if tmpyl was built with numpy support).\n\r\t"
-        "Outputs:\n\r\t\t"
-        "I0 (numpy.ndarray):\n\r\t\t\t"
-        "The Bessel Function I0 as a function of x.\n\r\t"
-        "Example:\n\r\t\t"
-        ">>> import numpy\n\r\t\t"
-        ">>> import tmpyl\n\r\t\t"
-        ">>> x = numpy.arange(0,100,0.01)\n\r\t\t"
-        ">>> y = tmpyl.besselI0(x)"
-    },
-    {
-        "besselJ0",
-        tmpyl_besselJ0,
-        METH_VARARGS,
-        "\r\t"
-        "Function:\n\r\t\t"
-        "tmpyl.besselJ0\n\r\t"
-        "Purpose:\n\r\t\t"
-        "Compute the Zeroth Bessel Function of the First Kind (J0).\n\r\t"
-        "Arguments\n\r\t\t"
-        "x (numpy.ndarray):\n\r\t\t\t"
-        "Independent variable for J_0(x). Allowed inputs are\n\r\t\t\t"
-        "int, float, list (of ints and floats), and\n\r\t\t\t"
-        "numpy arrays (if tmpyl was built with numpy support).\n\r\t"
-        "Outputs:\n\r\t\t"
-        "J0\n\r\t\t\t"
-        "The Bessel Function J0 as a function of x.\n\r\t"
-        "Example:\n\r\t\t"
-        ">>> import numpy\n\r\t\t"
-        ">>> import tmpyl\n\r\t\t"
-        ">>> x = numpy.arange(0, 100, 0.01)\n\r\t\t"
-        ">>> y = tmpyl.besselJ0(x)"
-    },
-    {
-        "fresnel_cos",
-        tmpyl_fresnel_cos,
-        METH_VARARGS,
-        "\r\t"
-        "Function:\n\r\t\t"
-        "tmpyl.fresnel_cos\n\r\t"
-        "Purpose:\n\r\t\t"
-        "Compute the Fresnel cosine function."
-        "\n\r\tArguments\n\r\t\t"
-        "x (numpy.ndarray):\n\r\t\t\t"
-        "A numpy array of real numbers. Independent variable for fresnel_cos(x)"
-        "\n\r\tOutputs:\n\r\t\t"
-        "fresnel_cos (numpy.ndarray):\n\r\t\t\t"
-        "The fresnel sine function of x.\n\r\t"
-        "Example:\n\r\t\t"
-        ">>> import numpy\n\r\t\t"
-        ">>> import tmpyl\n\r\t\t"
-        ">>> x = numpy.arange(0, 10, 0.01)\n\r\t\t"
-        ">>> y = tmpyl.fresnel_cos(x)"
-    },
-    {
-        "fresnel_sin",
-        tmpyl_fresnel_sin,
-        METH_VARARGS,
-        "\r\t"
-        "Function:\n\r\t\t"
-        "tmpyl.fresnel_sin\n\r\t"
-        "Purpose:\n\r\t\t"
-        "Compute the Fresnel sine function."
-        "\n\r\tArguments\n\r\t\t"
-        "x (numpy.ndarray):\n\r\t\t\t"
-        "A numpy array of real numbers. Independent variable for fresnel_sin(x)"
-        "\n\r\tOutputs:\n\r\t\t"
-        "fresnel_sin (numpy.ndarray):\n\r\t\t\t"
-        "The fresnel sine function of x.\n\r\t"
-        "Example:\n\r\t\t"
-        ">>> import numpy\n\r\t\t"
-        ">>> import tmpyl\n\r\t\t"
-        ">>> x = numpy.arange(0, 10, 0.01)\n\r\t\t"
-        ">>> y = tmpyl.fresnel_sin(x)"
-    },
-    {
-        "lambertw",
-        tmpyl_lambertw,
-        METH_VARARGS,
-        "\r\t"
-        "Function:\n\r\t\t"
-        "tmpyl.lambertw\n\r\t"
-        "Purpose:\n\r\t\t"
-        "Compute the Lambert W function, inverse of x*exp(x)."
-        "\n\r\tArguments\n\r\t\t"
-        "x (numpy.ndarray):\n\r\t\t\t"
-        "A numpy array of real numbers. Independent variable.\n\r\t"
-        "Outputs:\n\r\t\t"
-        "y (numpy.ndarray):\n\r\t\t\t"
-        "The Lambert W function of x.\n\r\t"
-        "Example:\n\r\t\t"
-        ">>> import numpy\n\r\t\t"
-        ">>> import tmpyl\n\r\t\t"
-        ">>> x = numpy.arange(0,100,0.01)\n\r\t\t"
-        ">>> y = tmpyl.lambertw(x)"
-    },
-    {
-        "sinc",
-        tmpyl_sinc,
-        METH_VARARGS,
-        "\r\t"
-        "Function:\n\r\t\t"
-        "tmpyl.sinc\n\r\t"
-        "Purpose:\n\r\t\t"
-        "Compute the sinc function, sin(x)/x."
-        "\n\r\tArguments\n\r\t\t"
-        "x (numpy.ndarray):\n\r\t\t\t"
-        "A numpy array of real numbers. Independent variable for sinc(x)\n\r\t"
-        "Outputs:\n\r\t\t"
-        "sinc (numpy.ndarray):\n\r\t\t\t"
-        "The sinc function of x.\n\r\t"
-        "Example:\n\r\t\t"
-        ">>> import numpy\n\r\t\t"
-        ">>> import tmpyl\n\r\t\t"
-        ">>> x = numpy.arange(0,100,0.01)\n\r\t\t"
-        ">>> y = tmpyl.sinc(x)"
-    },
+    TMPYL_ABS_METHOD,
+    TMPYL_ATAN_METHOD,
+    TMPYL_ATAN_PADE_METHOD,
+    TMPYL_ATAN_MACLAURIN_METHOD,
+    TMPYL_BESSELI0_METHOD,
+    TMPYL_BESSELJ0_METHOD,
+    TMPYL_FRESNEL_COS_METHOD,
+    TMPYL_FRESNEL_SIN_METHOD,
+    TMPYL_LAMBERTW_METHOD,
+    TMPYL_SINC_METHOD,
     {NULL, NULL, 0, NULL}
 };
 
