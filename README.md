@@ -4,11 +4,15 @@ Python wrapper for libtmpl. After building and installing
 ```
 python3 setup.py install
 ```
-or
+You may need to `sudo` this:
+```
+sudo python3 setup.py install
+```
+You can also use `pip`:
 ```
 pip3 install .
 ```
-For macOS users replace `python3` with `python` or `pip3` with `pip`.
+For macOS users replace `python3` with `python` and `pip3` with `pip`.
 
 The library also supports Python 2.
 ```

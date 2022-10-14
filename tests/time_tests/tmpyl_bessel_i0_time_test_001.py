@@ -1,24 +1,24 @@
 """
 ################################################################################
-#                                  LICENSE                                     #
+#                                   LICENSE                                    #
 ################################################################################
-#   This file is part of libtmpl.                                              #
+#   This file is part of libtmpyl.                                             #
 #                                                                              #
-#   libtmpl is free software: you can redistribute it and/or modify it         #
+#   libtmpyl is free software: you can redistribute it and/or modify it        #
 #   under the terms of the GNU General Public License as published by          #
 #   the Free Software Foundation, either version 3 of the License, or          #
 #   (at your option) any later version.                                        #
 #                                                                              #
-#   libtmpl is distributed in the hope that it will be useful,                 #
+#   libtmpyl is distributed in the hope that it will be useful,                #
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of             #
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              #
 #   GNU General Public License for more details.                               #
 #                                                                              #
 #   You should have received a copy of the GNU General Public License          #
-#   along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.          #
+#   along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.         #
 ################################################################################
 #   Author:     Ryan Maguire                                                   #
-#   Date:       January 28, 2022.                                              #
+#   Date:       October 14, 2022.                                              #
 ################################################################################
 """
 
@@ -58,8 +58,8 @@ except MyError:
 ARR = numpy.arange(-10.0, 10.0, 0.0001)
 
 # The two functions being compared.
-FUNC0 = tmpyl.besselJ0
-FUNC1 = scipy.special.j0
+FUNC0 = tmpyl.besselI0
+FUNC1 = scipy.special.i0
 
 # The number of iterations of the test.
 N = int(1E2)
@@ -78,6 +78,12 @@ time1 = timeit.timeit(
     number = N
 )
 
+# Get the error.
+y = FUNC0(ARR)
+z = FUNC1(ARR)
+
 # Print the results.
-print("tmpyl: %f" % time0)
-print("scipy: %f" % time1)
+print("tmpyl:         %f" % time0)
+print("scipy:         %f" % time1)
+print("max rel error: %e" % numpy.max(numpy.abs((y - z)/z)))
+print("rel rel error: %e" % numpy.sqrt(numpy.mean(numpy.square((y - z)/z))))
