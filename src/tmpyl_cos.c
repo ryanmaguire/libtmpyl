@@ -18,8 +18,8 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
-/*  Python wrapper for the atan_maclaurin function from libtmpl.              */
-PyObject *tmpyl_atan_maclaurin(PyObject *self, PyObject *args)
+/*  Python wrapper for the cos function from libtmpl.                         */
+PyObject *tmpyl_cos(PyObject *self, PyObject *args)
 {
     /*  Function object that will contain all of the function pointers.       */
     tmpyl_Generic_Function_Obj c_funcs;
@@ -28,9 +28,9 @@ PyObject *tmpyl_atan_maclaurin(PyObject *self, PyObject *args)
     c_funcs.long_func = NULL;
 
     /*  Real valued functions that take real arguments.                       */
-    c_funcs.float_func = tmpl_Float_Arctan_Maclaurin;
-    c_funcs.double_func = tmpl_Double_Arctan_Maclaurin;
-    c_funcs.ldouble_func = tmpl_LDouble_Arctan_Maclaurin;
+    c_funcs.float_func = tmpl_Float_Cos;
+    c_funcs.double_func = tmpl_Double_Cos;
+    c_funcs.ldouble_func = tmpl_LDouble_Cos;
 
     /*  Real valued functions that take complex arguments.                    */
     c_funcs.float_from_cfloat_func = NULL;
@@ -48,8 +48,8 @@ PyObject *tmpyl_atan_maclaurin(PyObject *self, PyObject *args)
     c_funcs.cdouble_from_cldouble_func = NULL;
 
     /*  Name of the function.                                                 */
-    c_funcs.func_name = "atan_maclaurin";
+    c_funcs.func_name = "cos";
 
     return tmpl_Get_Py_Func_From_C(self, args, &c_funcs);
 }
-/*  End of tmpyl_atan_maclaurin.                                              */
+/*  End of tmpyl_cos.                                                         */

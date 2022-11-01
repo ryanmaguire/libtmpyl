@@ -1,24 +1,24 @@
 /******************************************************************************
  *                                  LICENSE                                   *
  ******************************************************************************
- *  This file is part of libtmpl.                                             *
+ *  This file is part of libtmpyl.                                            *
  *                                                                            *
- *  libtmpl is free software: you can redistribute it and/or modify it        *
+ *  libtmpyl is free software: you can redistribute it and/or modify it       *
  *  under the terms of the GNU General Public License as published by         *
  *  the Free Software Foundation, either version 3 of the License, or         *
  *  (at your option) any later version.                                       *
  *                                                                            *
- *  libtmpl is distributed in the hope that it will be useful,                *
+ *  libtmpyl is distributed in the hope that it will be useful,               *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
  *  GNU General Public License for more details.                              *
  *                                                                            *
  *  You should have received a copy of the GNU General Public License         *
- *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
+ *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************/
 #include "tmpyl_common.h"
 
-/*  Python wrapper for the Bessel I0 function from libtmpl.                   */
+/*  Python wrapper for the absolute value function from libtmpl.              */
 PyObject *tmpyl_abs(PyObject *self, PyObject *args)
 {
     /*  Function object that will contain all of the function pointers.       */
@@ -52,4 +52,4 @@ PyObject *tmpyl_abs(PyObject *self, PyObject *args)
 
     return tmpl_Get_Py_Func_From_C(self, args, &c_funcs);
 }
-/*  End of tmpyl_besselI0.                                                    */
+/*  End of tmpyl_abs.                                                         */

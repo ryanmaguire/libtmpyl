@@ -1,20 +1,20 @@
 /******************************************************************************
- *                                 LICENSE                                    *
+ *                                  LICENSE                                   *
  ******************************************************************************
- *  This file is part of libtmpl.                                             *
+ *  This file is part of libtmpyl.                                            *
  *                                                                            *
- *  libtmpl is free software: you can redistribute it and/or modify           *
- *  it under the terms of the GNU General Public License as published by      *
+ *  libtmpyl is free software: you can redistribute it and/or modify it       *
+ *  under the terms of the GNU General Public License as published by         *
  *  the Free Software Foundation, either version 3 of the License, or         *
  *  (at your option) any later version.                                       *
  *                                                                            *
- *  libtmpl is distributed in the hope that it will be useful,                *
+ *  libtmpyl is distributed in the hope that it will be useful,               *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
  *  GNU General Public License for more details.                              *
  *                                                                            *
  *  You should have received a copy of the GNU General Public License         *
- *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
+ *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************
  *                              tmpyl_common                                  *
  ******************************************************************************
@@ -40,20 +40,6 @@
  *  5.) ndarraytypes.h                                                        *
  *  6.) ufuncobject.h                                                         *
  *          Header files for the C-Numpy API.                                 *
- ******************************************************************************
- *                            A NOTE ON COMMENTS                              *
- ******************************************************************************
- *  It is anticipated that many users of this code will have experience in    *
- *  either Python or IDL, but not C. Many comments are left to explain as     *
- *  much as possible. Vagueness or unclear code should be reported to:        *
- *  https://github.com/ryanmaguire/libtmpl/issues                             *
- ******************************************************************************
- *                            A FRIENDLY WARNING                              *
- ******************************************************************************
- *  This code relies on the Python-C API. Building this has been tested on    *
- *  Python 3.9 and Python 2.7. If you are running a different version and the *
- *  build fails, please report this to:                                       *
- *      https://github.com/ryanmaguire/libtmpl/issues                         *
  ******************************************************************************
  *  Author:     Ryan Maguire                                                  *
  *  Date:       August 31, 2021                                               *

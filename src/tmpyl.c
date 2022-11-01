@@ -74,6 +74,9 @@
 #include "tmpyl_atan_maclaurin_method.h"
 #include "tmpyl_besselI0_method.h"
 #include "tmpyl_besselJ0_method.h"
+#include "tmpyl_cbrt_method.h"
+#include "tmpyl_cos_method.h"
+#include "tmpyl_cosd_method.h"
 #include "tmpyl_fresnel_cos_method.h"
 #include "tmpyl_fresnel_sin_method.h"
 #include "tmpyl_lambertw_method.h"
@@ -88,6 +91,9 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_ATAN_MACLAURIN_METHOD,
     TMPYL_BESSELI0_METHOD,
     TMPYL_BESSELJ0_METHOD,
+    TMPYL_CBRT_METHOD,
+    TMPYL_COS_METHOD,
+    TMPYL_COSD_METHOD,
     TMPYL_FRESNEL_COS_METHOD,
     TMPYL_FRESNEL_SIN_METHOD,
     TMPYL_LAMBERTW_METHOD,
