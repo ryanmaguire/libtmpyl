@@ -49,11 +49,11 @@ except MyError:
     sys.exit("numpy not installed.")
 
 # The Array being tested.
-ARR = numpy.arange(-100.0, 100.0, 0.001)
+ARR = numpy.arange(-1.0E3, 1.0E3, 0.01)
 
 # Numpy cosd equivalent.
 def cosd(x):
-    return numpy.cos(numpy.deg2rad(x))
+    return numpy.cos(numpy.deg2rad(numpy.mod(x, 360.0)))
 
 # The two functions being compared.
 FUNC0 = tmpyl.cosd
@@ -83,5 +83,5 @@ z = FUNC1(ARR)
 # Print the results.
 print("tmpyl:         %f" % time0)
 print("numpy:         %f" % time1)
-print("max rel error: %e" % numpy.max(numpy.abs((y - z)/z)))
-print("rel rel error: %e" % numpy.sqrt(numpy.mean(numpy.square((y - z)/z))))
+print("max abs error: %e" % numpy.max(numpy.abs(y - z)))
+print("rel abs error: %e" % numpy.sqrt(numpy.mean(numpy.square(y - z))))

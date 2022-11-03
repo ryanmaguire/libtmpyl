@@ -27,7 +27,8 @@ typedef struct _tmpyl_Generic_Function_Obj {
     /*  Complex valued functions that take complex arguments.                 */
     tmpl_ComplexFloat (*cfloat_from_cfloat_func)(tmpl_ComplexFloat);
     tmpl_ComplexDouble (*cdouble_from_cdouble_func)(tmpl_ComplexDouble);
-    tmpl_ComplexLongDouble (*cdouble_from_cldouble_func)(tmpl_ComplexLongDouble);
+    tmpl_ComplexLongDouble
+    (*cldouble_from_cldouble_func)(tmpl_ComplexLongDouble);
 
     /*  The name of the function.                                             */
     const char *func_name;

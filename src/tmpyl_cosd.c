@@ -28,9 +28,9 @@ PyObject *tmpyl_cosd(PyObject *self, PyObject *args)
     c_funcs.long_func = NULL;
 
     /*  Real valued functions that take real arguments.                       */
-    c_funcs.float_func = NULL;
+    c_funcs.float_func = tmpl_Float_Cosd;
     c_funcs.double_func = tmpl_Double_Cosd;
-    c_funcs.ldouble_func = NULL;
+    c_funcs.ldouble_func = tmpl_LDouble_Cosd;
 
     /*  Real valued functions that take complex arguments.                    */
     c_funcs.float_from_cfloat_func = NULL;
@@ -45,7 +45,7 @@ PyObject *tmpyl_cosd(PyObject *self, PyObject *args)
     /*  Complex valued functions that take complex arguments.                 */
     c_funcs.cfloat_from_cfloat_func = NULL;
     c_funcs.cdouble_from_cdouble_func = NULL;
-    c_funcs.cdouble_from_cldouble_func = NULL;
+    c_funcs.cldouble_from_cldouble_func = NULL;
 
     /*  Name of the function.                                                 */
     c_funcs.func_name = "cosd";

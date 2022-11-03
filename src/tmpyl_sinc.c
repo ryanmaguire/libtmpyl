@@ -45,7 +45,7 @@ PyObject *tmpyl_sinc(PyObject *self, PyObject *args)
     /*  Complex valued functions that take complex arguments.                 */
     c_funcs.cfloat_from_cfloat_func = NULL;
     c_funcs.cdouble_from_cdouble_func = NULL;
-    c_funcs.cdouble_from_cldouble_func = NULL;
+    c_funcs.cldouble_from_cldouble_func = NULL;
 
     /*  Name of the function.                                                 */
     c_funcs.func_name = "sinc";
