@@ -80,7 +80,9 @@
 #include "tmpyl_fresnel_cos_method.h"
 #include "tmpyl_fresnel_sin_method.h"
 #include "tmpyl_lambertw_method.h"
+#include "tmpyl_log_method.h"
 #include "tmpyl_sinc_method.h"
+#include "tmpyl_sind_method.h"
 
 /*  All of the methods of the tmpyl module are defined in this array.         */
 static PyMethodDef tmpyl_methods[] =
@@ -97,7 +99,9 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_FRESNEL_COS_METHOD,
     TMPYL_FRESNEL_SIN_METHOD,
     TMPYL_LAMBERTW_METHOD,
+    TMPYL_LOG_METHOD,
     TMPYL_SINC_METHOD,
+    TMPYL_SIND_METHOD,
     {NULL, NULL, 0, NULL}
 };
 
