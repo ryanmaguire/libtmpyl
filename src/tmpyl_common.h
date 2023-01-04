@@ -41,6 +41,7 @@ tmpl_Get_Py_Func_From_C(PyObject *self,
 
 /*  All function wrappers for libtmpl.                                        */
 extern PyObject *tmpyl_abs(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_acos(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_atan(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_atan_pade(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_atan_maclaurin(PyObject *self, PyObject *args);

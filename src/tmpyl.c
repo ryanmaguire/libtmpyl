@@ -69,6 +69,7 @@
 
 /*  The PyMethodDef structs for the functions are in their own header files.  */
 #include "tmpyl_abs_method.h"
+#include "tmpyl_acos_method.h"
 #include "tmpyl_atan_method.h"
 #include "tmpyl_atan_pade_method.h"
 #include "tmpyl_atan_maclaurin_method.h"
@@ -88,6 +89,7 @@
 static PyMethodDef tmpyl_methods[] =
 {
     TMPYL_ABS_METHOD,
+    TMPYL_ACOS_METHOD,
     TMPYL_ATAN_METHOD,
     TMPYL_ATAN_PADE_METHOD,
     TMPYL_ATAN_MACLAURIN_METHOD,
@@ -152,4 +154,3 @@ PyMODINIT_FUNC inittmpyl(void)
 
 }
 #endif
-
