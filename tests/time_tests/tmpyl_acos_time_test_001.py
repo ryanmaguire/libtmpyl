@@ -22,6 +22,5 @@
 ################################################################################
 """
 
-import scipy.special as sf
 from timetest import *
-timetest(-5.0E6, 5.0E6, int(1E8), tmpyl.besselJ0, sf.j0)
+timetest(-1.0, 1.0, int(1E8), tmpyl.acos, numpy.arccos)

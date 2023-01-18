@@ -18,10 +18,9 @@
 #   along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.         #
 ################################################################################
 #   Author:     Ryan Maguire                                                   #
-#   Date:       January 28, 2022.                                              #
+#   Date:       October 31, 2022.                                              #
 ################################################################################
 """
 
-import scipy.special as sf
 from timetest import *
-timetest(-5.0E6, 5.0E6, int(1E8), tmpyl.besselJ0, sf.j0)
+timetest(0.0, 1.0E6, int(1E8), tmpyl.cbrt, numpy.cbrt)

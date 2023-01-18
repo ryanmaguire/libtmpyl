@@ -18,10 +18,14 @@
 #   along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.         #
 ################################################################################
 #   Author:     Ryan Maguire                                                   #
-#   Date:       January 28, 2022.                                              #
+#   Date:       January 11, 2023.                                              #
 ################################################################################
 """
 
-import scipy.special as sf
 from timetest import *
-timetest(-5.0E6, 5.0E6, int(1E8), tmpyl.besselJ0, sf.j0)
+
+# Numpy cosd equivalent.
+def mod_2(x):
+    return numpy.fmod(x, 2)
+
+timetest(0.5, 1.0E50, int(1E8), tmpyl.mod_2, mod_2)
