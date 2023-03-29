@@ -22,10 +22,14 @@
 ################################################################################
 """
 
-from timetest import *
+import numpy
+import tmpyl
+import timetest
 
-# Numpy cosd equivalent.
-def mod_360(x):
-    return numpy.fmod(x, 360)
+def mod_360(x_val):
+    """
+        Computes the argument mod 360.
+    """
+    return numpy.fmod(x_val, 360)
 
-timetest(0.5, 1.0E50, int(1E8), tmpyl.mod_360, mod_360)
+timetest.timetest(0.5, 1.0E50, int(1E8), tmpyl.mod_360, mod_360)

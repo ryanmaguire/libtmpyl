@@ -22,10 +22,14 @@
 ################################################################################
 """
 
-from timetest import *
+import numpy
+import tmpyl
+import timetest
 
-# Numpy cosd equivalent.
-def mod_2(x):
-    return numpy.fmod(x, 2)
+def mod_2(x_val):
+    """
+        Computes the argument mod 2.
+    """
+    return numpy.fmod(x_val, 2)
 
-timetest(0.5, 1.0E50, int(1E8), tmpyl.mod_2, mod_2)
+timetest.timetest(0.5, 1.0E50, int(1E8), tmpyl.mod_2, mod_2)

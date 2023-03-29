@@ -37,32 +37,44 @@ try:
 except MyError:
     sys.exit("numpy not installed.")
 
-# Check for tmpyl.
-try:
-    import tmpyl
-except MyError:
-    sys.exit("tmpyl not installed.")
-
 # Routine for comparing two functions.
 def timetest(start, end, number, func0, func1):
+    """
+        Function:
+            timetest
+        Purpose:
+            Compares the performance of two (hopefully identical) functions.
+        Arguments:
+            start (float):
+                The left end-point of the interval that is tested.
+            end (float):
+                The right end-point.
+            number (int):
+                The number of samples to try.
+            func0 (function):
+                Function object for the first function tested (from tmpyl).
+            func1 (function):
+                Function that func0 is compared against.
+        Outputs:
+            None.
+    """
 
-    dx = (end - start)/number
-    arr = numpy.arange(start, end, dx)
+    arr = numpy.arange(start, end, (end - start)/number)
 
-    t0 = time.time()
-    y = func0(arr)
-    t1 = time.time()
-    print("tmpyl: %f" % (t1-t0))
+    start_time = time.time()
+    tmpyl_arr = func0(arr)
+    end_time = time.time()
+    print("tmpyl: %f" % (end_time - start_time))
 
-    t0 = time.time()
-    z = func1(arr)
-    t1 = time.time()
-    print("other: %f" % (t1-t0))
+    start_time = time.time()
+    other_arr = func1(arr)
+    end_time = time.time()
+    print("other: %f" % (end_time - start_time))
 
     # Print the results.
-    ind = numpy.where(z != 0)
-    y = y[ind]
-    z = z[ind]
-    k = (y - z)/z
-    print("max rel error: %e" % numpy.max(numpy.abs(k)))
-    print("rms rel error: %e" % numpy.sqrt(numpy.mean(numpy.square(k))))
+    ind = numpy.where(other_arr != 0)
+    tmpyl_arr = tmpyl_arr[ind]
+    other_arr = other_arr[ind]
+    rel_err = (tmpyl_arr - other_arr)/other_arr
+    print("max rel error: %e" % numpy.max(numpy.abs(rel_err)))
+    print("rms rel error: %e" % numpy.sqrt(numpy.mean(numpy.square(rel_err))))

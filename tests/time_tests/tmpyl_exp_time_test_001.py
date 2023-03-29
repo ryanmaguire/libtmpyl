@@ -22,5 +22,7 @@
 ################################################################################
 """
 
-from timetest import *
-timetest(-100.0, 100.0, int(1E8), tmpyl.exp, numpy.exp)
+import numpy
+import tmpyl
+import timetest
+timetest.timetest(-2.0, 2.0, int(1E8), tmpyl.exp, numpy.exp)

@@ -21,7 +21,8 @@
 #   Date:       October 31, 2022.                                              #
 ################################################################################
 """
-
+# pylint: disable=E1101
 import scipy.special as sf
-from timetest import *
-timetest(-6.0, 6.0, int(1E8), tmpyl.erf, sf.erf)
+import tmpyl
+import timetest
+timetest.timetest(-6.0, 6.0, int(1E8), tmpyl.erf, sf.erf)

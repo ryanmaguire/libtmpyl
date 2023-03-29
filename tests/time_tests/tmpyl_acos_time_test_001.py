@@ -22,5 +22,7 @@
 ################################################################################
 """
 
-from timetest import *
-timetest(-1.0, 1.0, int(1E8), tmpyl.acos, numpy.arccos)
+import numpy
+import tmpyl
+import timetest
+timetest.timetest(-1.0, 1.0, int(1E8), tmpyl.acos, numpy.arccos)

@@ -77,7 +77,7 @@ srclist = []
 for file in os.listdir("src/"):
 
     # Only add .c files.
-    if (file[-1] == "c"):
+    if file[-1] == "c":
         srclist.append("src/%s" % file)
 
 # Optional arguments for the compiler.

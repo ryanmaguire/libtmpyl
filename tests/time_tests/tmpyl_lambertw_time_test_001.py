@@ -21,9 +21,15 @@
 #   Date:       October 31, 2022.                                              #
 ################################################################################
 """
-
+# pylint: disable=E1101
 import scipy.special as sf
-from timetest import *
-def w(x):
-    return sf.lambertw(x).real
-timetest(-0.3, 4.0, int(1E7), tmpyl.lambertw, w)
+import tmpyl
+import timetest
+
+def lambertw(x_val):
+    """
+        Computes W(x) for real x.
+    """
+    return sf.lambertw(x_val).real
+
+timetest.timetest(-0.3, 4.0, int(1E7), tmpyl.lambertw, lambertw)

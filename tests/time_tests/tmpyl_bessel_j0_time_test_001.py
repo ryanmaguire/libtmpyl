@@ -21,7 +21,8 @@
 #   Date:       January 28, 2022.                                              #
 ################################################################################
 """
-
+# pylint: disable=E1101
 import scipy.special as sf
-from timetest import *
-timetest(-5.0E6, 5.0E6, int(1E8), tmpyl.besselJ0, sf.j0)
+import tmpyl
+import timetest
+timetest.timetest(-5.0E6, 5.0E6, int(1E8), tmpyl.besselJ0, sf.j0)

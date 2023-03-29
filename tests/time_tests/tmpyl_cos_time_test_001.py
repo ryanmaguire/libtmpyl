@@ -22,5 +22,7 @@
 ################################################################################
 """
 
-from timetest import *
-timetest(0.0, 1.0E6, int(1E8), tmpyl.cos, numpy.cos)
+import numpy
+import tmpyl
+import timetest
+timetest.timetest(0.0, 1.0E6, int(1E8), tmpyl.cos, numpy.cos)

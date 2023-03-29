@@ -22,10 +22,15 @@
 ################################################################################
 """
 
-from timetest import *
+import numpy
+import tmpyl
+import timetest
 
 # Numpy cosd equivalent.
-def cosd(x):
-    return numpy.cos(numpy.deg2rad(numpy.mod(x, 360.0)))
+def cosd(x_val):
+    """
+        Computes cosine in degrees.
+    """
+    return numpy.cos(numpy.deg2rad(numpy.mod(x_val, 360.0)))
 
-timetest(0.0, 1.0E100, int(1E8), tmpyl.cosd, cosd)
+timetest.timetest(0.0, 1.0E100, int(1E8), tmpyl.cosd, cosd)
