@@ -16,21 +16,21 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************/
-#ifndef TMPYL_ACOS_PADE_METHOD_H
-#define TMPYL_ACOS_PADE_METHOD_H
-#define TMPYL_ACOS_PADE_METHOD                                                 \
+#ifndef TMPYL_ASIN_TAIL_END_METHOD_H
+#define TMPYL_ASIN_TAIL_END_METHOD_H
+#define TMPYL_ASIN_TAIL_END_METHOD                                             \
 {                                                                              \
-    "acos_pade",                                                               \
-    tmpyl_acos_pade,                                                           \
+    "asin_tail_end" ,                                                          \
+    tmpyl_asin_tail_end,                                                       \
     METH_VARARGS,                                                              \
     "\r"                                                                       \
     "Function:"                                                                \
     "\n\r    "                                                                 \
-    "tmpyl.acos_pade"                                                          \
+    "tmpyl.asin_tail_end"                                                      \
     "\n\r"                                                                     \
     "Purpose:"                                                                 \
     "\n\r    "                                                                 \
-    "Computes the inverse cosine using a Pade approximant."                    \
+    "Computes the inverse sine using the reflection formula for 0.5 < x < 1."  \
     "\n\r"                                                                     \
     "Arguments"                                                                \
     "\n\r    "                                                                 \
@@ -40,9 +40,9 @@
     "\n\r"                                                                     \
     "Outputs:"                                                                 \
     "\n\r    "                                                                 \
-    "acos_x:"                                                                  \
+    "asin_x:"                                                                  \
     "\n\r        "                                                             \
-    "The arc-cosine of x."                                                     \
+    "The arc-sine of x."                                                       \
     "\n\r"                                                                     \
     "Example:"                                                                 \
     "\n\r    "                                                                 \
@@ -50,8 +50,8 @@
     "\n\r    "                                                                 \
     ">>> import tmpyl"                                                         \
     "\n\r    "                                                                 \
-    ">>> x = numpy.arange(-0.9, 0.9, 0.01)"                                    \
+    ">>> x = numpy.arange(0.5, 1.0, 0.01)"                                     \
     "\n\r    "                                                                 \
-    ">>> y = tmpyl.acos_pade(x)"                                               \
+    ">>> y = tmpyl.asin_tail_end(x)"                                           \
 }
 #endif
