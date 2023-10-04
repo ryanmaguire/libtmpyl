@@ -18,6 +18,10 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
+#include <libtmpl/include/math/tmpl_arcsin_pade_double.h>
+#include <libtmpl/include/math/tmpl_arcsin_pade_float.h>
+#include <libtmpl/include/math/tmpl_arcsin_pade_ldouble.h>
+
 /*  Python wrapper for the arcsin function from libtmpl.                      */
 PyObject *tmpyl_asin_pade(PyObject *self, PyObject *args)
 {

@@ -18,6 +18,10 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
+#include <libtmpl/include/math/tmpl_arccos_rat_remez_double.h>
+#include <libtmpl/include/math/tmpl_arccos_rat_remez_float.h>
+#include <libtmpl/include/math/tmpl_arccos_rat_remez_ldouble.h>
+
 /*  Python wrapper for the arccos function from libtmpl.                      */
 PyObject *tmpyl_acos_rat_remez(PyObject *self, PyObject *args)
 {

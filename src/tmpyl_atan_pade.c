@@ -18,6 +18,10 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
+#include <libtmpl/include/math/tmpl_arctan_pade_double.h>
+#include <libtmpl/include/math/tmpl_arctan_pade_float.h>
+#include <libtmpl/include/math/tmpl_arctan_pade_ldouble.h>
+
 /*  Python wrapper for the atan_pade function from libtmpl.                   */
 PyObject *tmpyl_atan_pade(PyObject *self, PyObject *args)
 {

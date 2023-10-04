@@ -18,6 +18,10 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
+#include <libtmpl/include/math/tmpl_arctan_maclaurin_double.h>
+#include <libtmpl/include/math/tmpl_arctan_maclaurin_float.h>
+#include <libtmpl/include/math/tmpl_arctan_maclaurin_ldouble.h>
+
 /*  Python wrapper for the atan_maclaurin function from libtmpl.              */
 PyObject *tmpyl_atan_maclaurin(PyObject *self, PyObject *args)
 {

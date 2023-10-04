@@ -18,6 +18,10 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
+#include <libtmpl/include/math/tmpl_arcsin_maclaurin_double.h>
+#include <libtmpl/include/math/tmpl_arcsin_maclaurin_float.h>
+#include <libtmpl/include/math/tmpl_arcsin_maclaurin_ldouble.h>
+
 /*  Python wrapper for the arcsin function from libtmpl.                      */
 PyObject *tmpyl_asin_maclaurin(PyObject *self, PyObject *args)
 {

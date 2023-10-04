@@ -18,6 +18,10 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
+#include <libtmpl/include/math/tmpl_arcsin_tail_end_double.h>
+#include <libtmpl/include/math/tmpl_arcsin_tail_end_float.h>
+#include <libtmpl/include/math/tmpl_arcsin_tail_end_ldouble.h>
+
 /*  Python wrapper for the arcsin function from libtmpl.                      */
 PyObject *tmpyl_asin_tail_end(PyObject *self, PyObject *args)
 {

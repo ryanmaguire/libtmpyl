@@ -18,6 +18,10 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
+#include <libtmpl/include/math/tmpl_arccos_maclaurin_double.h>
+#include <libtmpl/include/math/tmpl_arccos_maclaurin_float.h>
+#include <libtmpl/include/math/tmpl_arccos_maclaurin_ldouble.h>
+
 /*  Python wrapper for the arccos function from libtmpl.                      */
 PyObject *tmpyl_acos_maclaurin(PyObject *self, PyObject *args)
 {
