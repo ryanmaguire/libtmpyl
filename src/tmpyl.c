@@ -70,18 +70,8 @@
 /*  The PyMethodDef structs for the functions are in their own header files.  */
 #include "tmpyl_abs_method.h"
 #include "tmpyl_acos_method.h"
-#include "tmpyl_acos_maclaurin_method.h"
-#include "tmpyl_acos_pade_method.h"
-#include "tmpyl_acos_rat_remez_method.h"
-#include "tmpyl_acos_tail_end_method.h"
 #include "tmpyl_asin_method.h"
-#include "tmpyl_asin_maclaurin_method.h"
-#include "tmpyl_asin_pade_method.h"
-#include "tmpyl_asin_rat_remez_method.h"
-#include "tmpyl_asin_tail_end_method.h"
 #include "tmpyl_atan_method.h"
-#include "tmpyl_atan_pade_method.h"
-#include "tmpyl_atan_maclaurin_method.h"
 #include "tmpyl_besselI0_method.h"
 #include "tmpyl_besselJ0_method.h"
 #include "tmpyl_cbrt_method.h"
@@ -103,18 +93,7 @@ static PyMethodDef tmpyl_methods[] =
 {
     TMPYL_ABS_METHOD,
     TMPYL_ACOS_METHOD,
-    TMPYL_ACOS_MACLAURIN_METHOD,
-    TMPYL_ACOS_PADE_METHOD,
-    TMPYL_ACOS_RAT_REMEZ_METHOD,
-    TMPYL_ACOS_TAIL_END_METHOD,
     TMPYL_ASIN_METHOD,
-    TMPYL_ASIN_MACLAURIN_METHOD,
-    TMPYL_ASIN_PADE_METHOD,
-    TMPYL_ASIN_RAT_REMEZ_METHOD,
-    TMPYL_ASIN_TAIL_END_METHOD,
-    TMPYL_ATAN_METHOD,
-    TMPYL_ATAN_PADE_METHOD,
-    TMPYL_ATAN_MACLAURIN_METHOD,
     TMPYL_BESSELI0_METHOD,
     TMPYL_BESSELJ0_METHOD,
     TMPYL_CBRT_METHOD,
