@@ -79,12 +79,14 @@
 #include "tmpyl_cosd_method.h"
 #include "tmpyl_erf_method.h"
 #include "tmpyl_exp_method.h"
+#include "tmpyl_floor_method.h"
 #include "tmpyl_fresnel_cos_method.h"
 #include "tmpyl_fresnel_sin_method.h"
 #include "tmpyl_lambertw_method.h"
 #include "tmpyl_log_method.h"
 #include "tmpyl_mod_2_method.h"
 #include "tmpyl_mod_360_method.h"
+#include "tmpyl_normalized_fresnel_cos_method.h"
 #include "tmpyl_sinc_method.h"
 #include "tmpyl_sind_method.h"
 
@@ -101,12 +103,14 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_COSD_METHOD,
     TMPYL_ERF_METHOD,
     TMPYL_EXP_METHOD,
+    TMPYL_FLOOR_METHOD,
     TMPYL_FRESNEL_COS_METHOD,
     TMPYL_FRESNEL_SIN_METHOD,
     TMPYL_LAMBERTW_METHOD,
     TMPYL_LOG_METHOD,
     TMPYL_MOD_2_METHOD,
     TMPYL_MOD_360_METHOD,
+    TMPYL_NORMALIZED_FRESNEL_COS_METHOD,
     TMPYL_SINC_METHOD,
     TMPYL_SIND_METHOD,
     {NULL, NULL, 0, NULL}
