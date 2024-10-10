@@ -28,9 +28,9 @@ PyObject *tmpyl_normalized_fresnel_sin(PyObject *self, PyObject *args)
     c_funcs.long_func = NULL;
 
     /*  Real valued functions that take real arguments.                       */
-    c_funcs.float_func = NULL;
+    c_funcs.float_func = tmpl_Float_Normalized_Fresnel_Sin;
     c_funcs.double_func = tmpl_Double_Normalized_Fresnel_Sin;
-    c_funcs.ldouble_func = NULL;
+    c_funcs.ldouble_func = tmpl_LDouble_Normalized_Fresnel_Sin;
 
     /*  Real valued functions that take complex arguments.                    */
     c_funcs.float_from_cfloat_func = NULL;
