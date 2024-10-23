@@ -5,39 +5,40 @@
 #include <Python.h>
 #include <libtmpl/include/tmpl.h>
 
-typedef struct _tmpyl_Generic_Function_Obj {
+typedef struct tmpyl_GenericFunctionObj_Def {
+
     /*  Integer valued functions.                                             */
-    long (*long_func)(long);
+    tmpl_LongFunction l2l;
 
     /*  Real valued functions that take real arguments.                       */
-    float (*float_func)(float);
-    double (*double_func)(double);
-    long double (*ldouble_func)(long double);
+    tmpl_FloatFunction f2f;
+    tmpl_DoubleFunction d2d;
+    tmpl_LongDoubleFunction ld2ld;
 
     /*  Real valued functions that take complex arguments.                    */
-    float (*float_from_cfloat_func)(tmpl_ComplexFloat);
-    double (*double_from_cdouble_func)(tmpl_ComplexDouble);
-    long double (*ldouble_from_cldouble_func)(tmpl_ComplexLongDouble);
+    tmpl_ComplexFloatFunctional cf2f;
+    tmpl_ComplexDoubleFunctional cd2d;
+    tmpl_ComplexLongDoubleFunctional cld2ld;
 
     /*  Complex valued functions that take real arguments.                    */
-    tmpl_ComplexFloat (*cfloat_from_float_func)(float);
-    tmpl_ComplexDouble (*cdouble_from_double_func)(double);
-    tmpl_ComplexLongDouble (*cldouble_from_ldouble_func)(long double);
+    tmpl_ComplexDoublePath d2cd;
+    tmpl_ComplexFloatPath f2cf;
+    tmpl_ComplexLongDoublePath ld2cld;
 
     /*  Complex valued functions that take complex arguments.                 */
-    tmpl_ComplexFloat (*cfloat_from_cfloat_func)(tmpl_ComplexFloat);
-    tmpl_ComplexDouble (*cdouble_from_cdouble_func)(tmpl_ComplexDouble);
-    tmpl_ComplexLongDouble
-    (*cldouble_from_cldouble_func)(tmpl_ComplexLongDouble);
+    tmpl_ComplexFloatFunction cf2cf;
+    tmpl_ComplexDoubleFunction cd2cd;
+    tmpl_ComplexLongDoubleFunction cld2cld;
 
     /*  The name of the function.                                             */
     const char *func_name;
-} tmpyl_Generic_Function_Obj;
+
+} tmpyl_GenericFunctionObj;
 
 extern PyObject *
 tmpl_Get_Py_Func_From_C(PyObject *self,
                         PyObject *args,
-                        tmpyl_Generic_Function_Obj *c_func);
+                        const tmpyl_GenericFunctionObj * const cfuncs);
 
 /*  All function wrappers for libtmpl.                                        */
 extern PyObject *tmpyl_abs(PyObject *self, PyObject *args);

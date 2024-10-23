@@ -22,30 +22,30 @@
 PyObject *tmpyl_mod_2(PyObject *self, PyObject *args)
 {
     /*  Function object that will contain all of the function pointers.       */
-    tmpyl_Generic_Function_Obj c_funcs;
+    tmpyl_GenericFunctionObj c_funcs;
 
     /*  Integer valued functions.                                             */
-    c_funcs.long_func = NULL;
+    c_funcs.l2l = NULL;
 
     /*  Real valued functions that take real arguments.                       */
-    c_funcs.float_func = tmpl_Float_Mod_2;
-    c_funcs.double_func = tmpl_Double_Mod_2;
-    c_funcs.ldouble_func = tmpl_LDouble_Mod_2;
+    c_funcs.f2f = tmpl_Float_Mod_2;
+    c_funcs.d2d = tmpl_Double_Mod_2;
+    c_funcs.ld2ld = tmpl_LDouble_Mod_2;
 
     /*  Real valued functions that take complex arguments.                    */
-    c_funcs.float_from_cfloat_func = NULL;
-    c_funcs.double_from_cdouble_func = NULL;
-    c_funcs.ldouble_from_cldouble_func = NULL;
+    c_funcs.cf2f = NULL;
+    c_funcs.cd2d = NULL;
+    c_funcs.cld2ld = NULL;
 
     /*  Complex valued functions that take real arguments.                    */
-    c_funcs.cfloat_from_float_func = NULL;
-    c_funcs.cdouble_from_double_func = NULL;
-    c_funcs.cldouble_from_ldouble_func = NULL;
+    c_funcs.f2cf = NULL;
+    c_funcs.d2cd = NULL;
+    c_funcs.ld2cld = NULL;
 
     /*  Complex valued functions that take complex arguments.                 */
-    c_funcs.cfloat_from_cfloat_func = NULL;
-    c_funcs.cdouble_from_cdouble_func = NULL;
-    c_funcs.cldouble_from_cldouble_func = NULL;
+    c_funcs.cf2cf = NULL;
+    c_funcs.cd2cd = NULL;
+    c_funcs.cld2cld = NULL;
 
     /*  Name of the function.                                                 */
     c_funcs.func_name = "mod_2";

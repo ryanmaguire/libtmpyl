@@ -93,18 +93,19 @@ static void tmpyl_capsule_cleanup(PyObject *capsule)
 
 /*  This function handles numpy arrays.                                       */
 static PyObject *
-tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
-                                 tmpyl_Generic_Function_Obj *c_func)
+tmpyl_Get_Py_Out_From_Numpy_Array(PyObject * const x,
+                                  const tmpyl_GenericFunctionObj * const c_func)
 {
     /*  Variable for indexing, and a variable for the length of the array.    */
-    unsigned long int n, dim;
+    size_t dim;
     npy_intp np_dim;
 
     /*  One of the functions wants the address of a SIGNED long integer.      */
     long int signed_dim;
 
     /*  The data in a numpy array is returned as a void pointer.              */
-    void *data, *out;
+    const void *data;
+    void *out;
 
     /*  typenum for the data type the void pointer represents.                */
     int typenum;
@@ -157,8 +158,8 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
 
     if (np_dim < 0)
         goto FAILURE;
-    else
-        dim = (unsigned long int)np_dim;
+
+    dim = (size_t)np_dim;
 
     /*  Check that the array is not empty.                                    */
     if (dim == 0)
@@ -184,7 +185,7 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
         case NPY_FLOAT:
 
             /*  This function is real in, real out.                           */
-            if (c_func->float_func != NULL)
+            if (c_func->f2f != NULL)
             {
                 /*  Allocate memory for the output.                           */
                 out = malloc(sizeof(float) * dim);
@@ -195,11 +196,11 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
 
                 /*  Otherwise, pass the data and the function pointer to      *
                  *  libtmpl for computation.                                  */
-                tmpl_get_void_from_void_f2f(data, out, dim, c_func->float_func);
+                tmpl_Void_Array_F2F(data, out, dim, c_func->f2f);
             }
 
             /*  This function is real in, complex out.                        */
-            else if (c_func->cfloat_from_float_func != NULL)
+            else if (c_func->f2cf != NULL)
             {
                 /*  The output is a complex float, so change typenum to this. */
                 typenum = NPY_CFLOAT;
@@ -213,8 +214,7 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
 
                 /*  Otherwise, pass the data and the function pointer to      *
                  *  libtmpl for computation.                                  */
-                tmpl_get_void_from_void_f2cf(data, out, dim,
-                                             c_func->cfloat_from_float_func);
+                tmpl_Void_Array_F2CF(data, out, dim, c_func->f2cf);
             }
 
             /*  If neither exists, the function does not support float.       */
@@ -227,7 +227,7 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
         case NPY_DOUBLE:
 
             /*  This function is real in, real out.                           */
-            if (c_func->double_func != NULL)
+            if (c_func->d2d != NULL)
             {
                 /*  Allocate memory for the output data.                      */
                 out = malloc(sizeof(double) * dim);
@@ -238,12 +238,11 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
 
                 /*  Otherwise, pass the data and the function pointer to      *
                  *  libtmpl for computation.                                  */
-                tmpl_get_void_from_void_d2d(data, out, dim,
-                                            c_func->double_func);
+                tmpl_Void_Array_D2D(data, out, dim, c_func->d2d);
             }
 
             /*  Otherwise, check for real in, complex out.                    */
-            else if (c_func->cdouble_from_double_func != NULL)
+            else if (c_func->d2cd != NULL)
             {
                 /*  The output is a complex double, so change typenum to this.*/
                 typenum = NPY_CDOUBLE;
@@ -257,8 +256,7 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
 
                 /*  Otherwise, pass the data and the function pointer to      *
                  *  libtmpl for computation.                                  */
-                tmpl_get_void_from_void_d2cd(data, out, dim,
-                                             c_func->cdouble_from_double_func);
+                tmpl_Void_Array_D2CD(data, out, dim, c_func->d2cd);
             }
 
             /*  If neither exists, the function does not support double.      */
@@ -270,7 +268,7 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
         case NPY_LONGDOUBLE:
 
             /*  This function is real in, real out.                           */
-            if (c_func->ldouble_func != NULL)
+            if (c_func->ld2ld != NULL)
             {
                 /*  Allocate memory for the output data.                      */
                 out = malloc(sizeof(long double) * dim);
@@ -281,12 +279,11 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
 
                 /*  Otherwise, pass the data and the function pointer to      *
                  *  libtmpl for computation.                                  */
-                tmpl_get_void_from_void_ld2ld(data, out, dim,
-                                              c_func->ldouble_func);
+                tmpl_Void_Array_LD2LD(data, out, dim, c_func->ld2ld);
             }
 
             /*  Otherwise, check for real in, complex out.                    */
-            else if (c_func->cldouble_from_ldouble_func != NULL)
+            else if (c_func->ld2cld != NULL)
             {
                 /*  The output is a complex long double, so change typenum.   */
                 typenum = NPY_CLONGDOUBLE;
@@ -300,8 +297,7 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
 
                 /*  Otherwise, pass the data and the function pointer to      *
                  *  libtmpl for computation.                                  */
-                tmpl_get_void_from_void_ld2cld(data, out, dim,
-                                               c_func->cldouble_from_ldouble_func);
+                tmpl_Void_Array_LD2CLD(data, out, dim, c_func->ld2cld);
             }
 
             /*  If neither exists, the function does not support long double. */
@@ -310,27 +306,132 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
 
             break;
 
-        case NPY_CDOUBLE:
+        case NPY_CFLOAT:
 
-            /*  Check for complex in, complex out.                            */
-            if (c_func->cdouble_from_cdouble_func == NULL)
+            /*  This function is complex in, complex out.                     */
+            if (c_func->cf2cf != NULL)
+            {
+                /*  Allocate memory for the output data.                      */
+                out = malloc(sizeof(tmpl_ComplexFloat) * dim);
+
+                /*  Check if malloc failed.                                   */
+                if (out == NULL)
+                    goto MALLOC_FAILURE;
+
+                /*  Otherwise, pass the data and the function pointer to      *
+                 *  libtmpl for computation.                                  */
+                tmpl_Void_Array_CF2CF(data, out, dim, c_func->cf2cf);
+            }
+
+            /*  This function is complex in, real out.                        */
+            else if (c_func->cf2f != NULL)
+            {
+                /*  Allocate memory for the output data.                      */
+                out = malloc(sizeof(float) * dim);
+
+                /*  Check if malloc failed.                                   */
+                if (out == NULL)
+                    goto MALLOC_FAILURE;
+
+                /*  The output is a float, so change typenum.                 */
+                typenum = NPY_FLOAT;
+
+                /*  Otherwise, pass the data and the function pointer to      *
+                 *  libtmpl for computation.                                  */
+                tmpl_Void_Array_CF2F(data, out, dim, c_func->cf2f);
+            }
+
+            /*  If neither exists, the function does not support complex.     */
+            else
                 goto FAILURE;
 
-            out = malloc(sizeof(tmpl_ComplexDouble) * dim);
+            break;
 
-            /*  Check if malloc failed.                                       */
-            if (out == NULL)
-                goto MALLOC_FAILURE;
+        case NPY_CDOUBLE:
 
-            /*  Otherwise, pass the function pointer to libtmpl.              */
-            tmpl_get_void_from_void_cd2cd(data, out, dim,
-                                          c_func->cdouble_from_cdouble_func);
+            /*  This function is complex in, complex out.                     */
+            if (c_func->cd2cd != NULL)
+            {
+                /*  Allocate memory for the output data.                      */
+                out = malloc(sizeof(tmpl_ComplexDouble) * dim);
+
+                /*  Check if malloc failed.                                   */
+                if (out == NULL)
+                    goto MALLOC_FAILURE;
+
+                /*  Otherwise, pass the data and the function pointer to      *
+                 *  libtmpl for computation.                                  */
+                tmpl_Void_Array_CD2CD(data, out, dim, c_func->cd2cd);
+            }
+
+            /*  This function is complex in, real out.                        */
+            else if (c_func->cd2d != NULL)
+            {
+                /*  Allocate memory for the output data.                      */
+                out = malloc(sizeof(double) * dim);
+
+                /*  Check if malloc failed.                                   */
+                if (out == NULL)
+                    goto MALLOC_FAILURE;
+
+                /*  The output is a double, so change typenum.                */
+                typenum = NPY_DOUBLE;
+
+                /*  Otherwise, pass the data and the function pointer to      *
+                 *  libtmpl for computation.                                  */
+                tmpl_Void_Array_CD2D(data, out, dim, c_func->cd2d);
+            }
+
+            /*  If neither exists, the function does not support complex.     */
+            else
+                goto FAILURE;
+
+            break;
+
+        case NPY_CLONGDOUBLE:
+
+            /*  This function is complex in, complex out.                     */
+            if (c_func->cld2cld != NULL)
+            {
+                /*  Allocate memory for the output data.                      */
+                out = malloc(sizeof(tmpl_ComplexLongDouble) * dim);
+
+                /*  Check if malloc failed.                                   */
+                if (out == NULL)
+                    goto MALLOC_FAILURE;
+
+                /*  Otherwise, pass the data and the function pointer to      *
+                 *  libtmpl for computation.                                  */
+                tmpl_Void_Array_CLD2CLD(data, out, dim, c_func->cld2cld);
+            }
+
+            /*  This function is complex in, real out.                        */
+            else if (c_func->cld2ld != NULL)
+            {
+                /*  Allocate memory for the output data.                      */
+                out = malloc(sizeof(long double) * dim);
+
+                /*  Check if malloc failed.                                   */
+                if (out == NULL)
+                    goto MALLOC_FAILURE;
+
+                /*  The output is a long double, so change typenum.           */
+                typenum = NPY_LONGDOUBLE;
+
+                /*  Otherwise, pass the data and the function pointer to      *
+                 *  libtmpl for computation.                                  */
+                tmpl_Void_Array_CLD2LD(data, out, dim, c_func->cld2ld);
+            }
+
+            /*  If neither exists, the function does not support complex.     */
+            else
+                goto FAILURE;
 
             break;
 
         /*  Integer inputs.                                                   */
         case NPY_LONG:
-            if (c_func->long_func != NULL)
+            if (c_func->l2l != NULL)
             {
                 /*  Allocate memory for the output.                           */
                 out = malloc(sizeof(long) * dim);
@@ -340,74 +441,40 @@ tmpyl_Get_Py_Out_From_NumpyArray(PyObject *x,
                     goto MALLOC_FAILURE;
 
                 /*  If not, perform the computation.                          */
-                tmpl_get_void_from_void_l2l(data, out, dim, c_func->long_func);
+                tmpl_Void_Array_L2L(data, out, dim, c_func->l2l);
             }
 
             /*  If no integer value function exists, try converting to real.  */
-            else if (c_func->double_func != NULL)
+            else if (c_func->d2d != NULL)
             {
                 /*  Try to convert the data to double.                        */
-                double *temp = malloc(sizeof(*temp) * dim);
+                out = malloc(sizeof(double) * dim);
 
                 /*  Check if malloc failed.                                   */
-                if (temp == NULL)
+                if (out == NULL)
                     goto MALLOC_FAILURE;
 
                 /*  The output is double, so change typenum.                  */
                 typenum = NPY_DOUBLE;
 
-                /*  Allocate memory for the output.                           */
+                /*  Perform the computation in libtmpl.                       */
+                tmpl_Void_Array_L2D(data, out, dim, c_func->d2d);
+            }
+
+            else if (c_func->d2cd != NULL)
+            {
+                /*  Try to convert the data to double.                        */
                 out = malloc(sizeof(double) * dim);
 
                 /*  Check if malloc failed.                                   */
                 if (out == NULL)
-                {
-                    /*  Free temp since it was succesfully allocated, then go *
-                     *  to malloc failure.                                    */
-                    free(temp);
                     goto MALLOC_FAILURE;
-                }
-
-                /*  Loop through the data and cast to double.                 */
-                for (n = 0UL; n < dim; ++n)
-                    temp[n] = (double)(((long *)data)[n]);
-
-                /*  Perform the computation in libtmpl.                       */
-                tmpl_get_void_from_void_d2d(temp, out, dim,
-                                            c_func->double_func);
-
-                /*  Free temp since we're done with it.                       */
-                free(temp);
-            }
-            else if (c_func->cdouble_from_double_func != NULL)
-            {
-                /*  Allocate memory for a temp variable to cast to double.    */
-                double *temp = malloc(sizeof(*temp) * dim);
 
                 /*  The output is complex double, so change typenum.          */
                 typenum = NPY_CDOUBLE;
 
-                /*  Allocate memory for the output.                           */
-                out = malloc(sizeof(tmpl_ComplexDouble) * dim);
-
-                /*  Check if malloc failed.                                   */
-                if (out == NULL)
-                {
-                    /*  Free temp since it was succesfully allocated, then go *
-                     *  to malloc failure.                                    */
-                    free(temp);
-                    goto MALLOC_FAILURE;
-                }
-
-                for (n = 0UL; n < dim; ++n)
-                    temp[n] = (double)(((long *)data)[n]);
-
-                /*  Perform the computation with libtmpl.                     */
-                tmpl_get_void_from_void_d2cd(temp, out, dim,
-                                             c_func->cdouble_from_double_func);
-
-                /*  Free temp since we're done with it.                       */
-                free(temp);
+                /*  Perform the computation in libtmpl.                       */
+                tmpl_Void_Array_L2CD(data, out, dim, c_func->d2cd);
             }
 
             /*  If none of these exist, the function does not support long.   */
@@ -466,17 +533,18 @@ MALLOC_FAILURE:
 
 /*  This function passes integer objects to C for computation.                */
 static PyObject *
-tmpyl_Get_Py_Out_From_Long(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
+tmpyl_Get_Py_Out_From_Long(PyObject * const x,
+                           const tmpyl_GenericFunctionObj * const c_func)
 {
-    /*  If the the tmpyl_Generic_Function_Obj pointer contains an integer     *
+    /*  If the the tmpyl_GenericFunctionObj pointer contains an integer       *
      *  function (integer in, integer out), use this.                         */
-    if (c_func->long_func != NULL)
+    if (c_func->l2l != NULL)
     {
         /*  Extract the data from Python as a long int.                       */
         long int x_int = PyLong_AsLong(x);
 
         /*  Pass the input to the C function.                                 */
-        long int y_int = c_func->long_func(x_int);
+        long int y_int = c_func->l2l(x_int);
 
         /*  Convert the integer into a PyObject pointer with PyLong_FromLong. */
         return PyLong_FromLong(y_int);
@@ -484,13 +552,13 @@ tmpyl_Get_Py_Out_From_Long(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
 
     /*  If there's no integer-to-integer function, try a double-to-double     *
      *  function. The resulting PyObject will be a float object.              */
-    else if (c_func->double_func != NULL)
+    else if (c_func->d2d != NULL)
     {
         /*  Convert the integer object into a double.                         */
         double x_val = PyLong_AsDouble(x);
 
         /*  Pass the data to the C function for computation.                  */
-        double y_val = c_func->double_func(x_val);
+        double y_val = c_func->d2d(x_val);
 
         /*  Convert the double to a PyObject pointer for a float and return.  */
         return PyFloat_FromDouble(y_val);
@@ -499,13 +567,13 @@ tmpyl_Get_Py_Out_From_Long(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
     /*  Lastly, check if there is a function that takes in a real value and   *
      *  returns a complex value. If there is, the output will be a complex    *
      *  Python object (i.e. complex number in Python).                        */
-    else if (c_func->cdouble_from_double_func != NULL)
+    else if (c_func->d2cd != NULL)
     {
         /*  Extract the data from the PyObject and convert it to a double.    */
         double x_in = PyLong_AsDouble(x);
 
         /*  Run the computation, creating a tmpl_ComplexDouble in the process.*/
-        tmpl_ComplexDouble z_out = c_func->cdouble_from_double_func(x_in);
+        tmpl_ComplexDouble z_out = c_func->d2cd(x_in);
 
         /*  Python will not accept a tmpl_ComplexDouble struct as a valid     *
          *  complex number. We can create a complex object from two doubles,  *
@@ -548,17 +616,18 @@ tmpyl_Get_Py_Out_From_Long(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
 
 /*  This function passes integer objects to C for computation.                */
 static PyObject *
-tmpyl_Get_Py_Out_From_Int(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
+tmpyl_Get_Py_Out_From_Int(PyObject * const x,
+                         const tmpyl_GenericFunctionObj * const c_func)
 {
-    /*  If the the tmpyl_Generic_Function_Obj pointer contains an integer     *
+    /*  If the the tmpyl_GenericFunctionObj pointer contains an integer       *
      *  function (integer in, integer out), use this.                         */
-    if (c_func->long_func != NULL)
+    if (c_func->l2l != NULL)
     {
         /*  Extract the data from Python as a long int.                       */
         long int x_int = PyInt_AsLong(x);
 
         /*  Pass the input to the C function.                                 */
-        long int y_int = c_func->long_func(x_int);
+        long int y_int = c_func->l2l(x_int);
 
         /*  Convert the integer into a PyObject pointer with PyInt_FromLong.  */
         return PyInt_FromLong(y_int);
@@ -566,14 +635,14 @@ tmpyl_Get_Py_Out_From_Int(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
 
     /*  If there's no integer-to-integer function, try a double-to-double     *
      *  function. The resulting PyObject will be a float object.              */
-    else if (c_func->double_func != NULL)
+    else if (c_func->d2d != NULL)
     {
         /*  Convert the integer object into a double.                         */
         long int x_int = PyInt_AsLong(x);
         double x_val = (double)x_int;
 
         /*  Pass the data to the C function for computation.                  */
-        double y_val = c_func->double_func(x_val);
+        double y_val = c_func->d2d(x_val);
 
         /*  Convert the double to a PyObject pointer for a float and return.  */
         return PyFloat_FromDouble(y_val);
@@ -582,14 +651,14 @@ tmpyl_Get_Py_Out_From_Int(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
     /*  Lastly, check if there is a function that takes in a real value and   *
      *  returns a complex value. If there is, the output will be a complex    *
      *  Python object (i.e. complex number in Python).                        */
-    else if (c_func->cdouble_from_double_func != NULL)
+    else if (c_func->d2cd != NULL)
     {
         /*  Extract the data from the PyObject and convert it to a double.    */
         long int x_int = PyInt_AsLong(x);
         double x_in = (double)x_int;
 
         /*  Run the computation, creating a tmpl_ComplexDouble in the process.*/
-        tmpl_ComplexDouble z_out = c_func->cdouble_from_double_func(x_in);
+        tmpl_ComplexDouble z_out = c_func->d2cd(x_in);
 
         /*  Python will not accept a tmpl_ComplexDouble struct as a valid     *
          *  complex number. We can create a complex object from two doubles,  *
@@ -630,18 +699,19 @@ tmpyl_Get_Py_Out_From_Int(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
 /*  End of #if PY_VERSION_HEX < 0x03000000.                                   */
 
 /*  Function for passing a float object to C for computation.                 */
-PyObject *
-tmpyl_Get_Py_Out_From_Float(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
+static PyObject *
+tmpyl_Get_Py_Out_From_Float(PyObject * const x,
+                            const tmpyl_GenericFunctionObj * const c_func)
 {
     /*  Check if there's a double-to-double function. The resulting PyObject  *
      *  will by a float object.                                               */
-    if (c_func->double_func != NULL)
+    if (c_func->d2d != NULL)
     {
         /*  Convert the float object into a double.                           */
         double x_val = PyFloat_AsDouble(x);
 
         /*  Pass the data to the C function for computation.                  */
-        double y_val = c_func->double_func(x_val);
+        double y_val = c_func->d2d(x_val);
 
         /*  Convert the double to a PyObject pointer for a float and return.  */
         return PyFloat_FromDouble(y_val);
@@ -650,13 +720,13 @@ tmpyl_Get_Py_Out_From_Float(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
     /*  Lastly, check if there is a function that takes in a real value and   *
      *  returns a complex value. If there is, the output will be a complex    *
      *  Python object (i.e. complex number in Python).                        */
-    else if (c_func->cdouble_from_double_func != NULL)
+    else if (c_func->d2cd != NULL)
     {
         /*  Extract the data from the PyObject and convert it to a double.    */
         double x_in = PyFloat_AsDouble(x);
 
         /*  Run the computation, creating a tmpl_ComplexDouble in the process.*/
-        tmpl_ComplexDouble z_out = c_func->cdouble_from_double_func(x_in);
+        tmpl_ComplexDouble z_out = c_func->d2cd(x_in);
 
         /*  Python will not accept a tmpl_ComplexDouble struct as a valid     *
          *  complex number. We can create a complex object from two doubles,  *
@@ -694,12 +764,13 @@ tmpyl_Get_Py_Out_From_Float(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
 /*  tmpl_Get_Py_Out_From_Float.                                               */
 
 /*  Function for passing complex Python objects to C for computation.         */
-PyObject *
-tmpyl_Get_Py_Out_From_Complex(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
+static PyObject *
+tmpyl_Get_Py_Out_From_Complex(PyObject * const x,
+                              const tmpyl_GenericFunctionObj * const c_func)
 {
     /*  Check if there is a function that takes a complex number in and       *
      *  returns a complex number.                                             */
-    if (c_func->cdouble_from_cdouble_func)
+    if (c_func->cd2cd)
     {
         /*  Extract the real and imaginary parts from the complex number.     */
         double real_in = PyComplex_RealAsDouble(x);
@@ -709,7 +780,7 @@ tmpyl_Get_Py_Out_From_Complex(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
         tmpl_ComplexDouble z_in = tmpl_CDouble_Rect(real_in, imag_in);
 
         /*  Pass the data to the function.                                    */
-        tmpl_ComplexDouble z_out = c_func->cdouble_from_cdouble_func(z_in);
+        tmpl_ComplexDouble z_out = c_func->cd2cd(z_in);
 
         /*  Extract the real and imaginary parts from the output.             */
         double real_out = tmpl_CDouble_Real_Part(z_out);
@@ -720,7 +791,7 @@ tmpyl_Get_Py_Out_From_Complex(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
     }
 
     /*  Check if there's a complex-to-real function, like complex modulus.    */
-    else if (c_func->double_from_cdouble_func)
+    else if (c_func->cd2d)
     {
         /*  Extract the real and imaginary parts from the complex number.     */
         double real_in = PyComplex_RealAsDouble(x);
@@ -730,7 +801,7 @@ tmpyl_Get_Py_Out_From_Complex(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
         tmpl_ComplexDouble z_in = tmpl_CDouble_Rect(real_in, imag_in);
 
         /*  Pass the data to the function.                                    */
-        double out = c_func->double_from_cdouble_func(z_in);
+        double out = c_func->cd2d(z_in);
 
         /*  Convert to a float Python object and return.                      */
         return PyFloat_FromDouble(out);
@@ -761,7 +832,8 @@ tmpyl_Get_Py_Out_From_Complex(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
 /*  End of tmpyl_Get_Py_Out_From_Complex.                                     */
 
 static PyObject *
-tmpyl_Get_Py_Out_From_List(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
+tmpyl_Get_Py_Out_From_List(PyObject * const x,
+                           const tmpyl_GenericFunctionObj * const c_func)
 {
     PyObject *nth_item;
     PyObject *current_item;
@@ -816,7 +888,7 @@ tmpyl_Get_Py_Out_From_List(PyObject *x, tmpyl_Generic_Function_Obj *c_func)
 
 PyObject *
 tmpl_Get_Py_Func_From_C(PyObject *self, PyObject *args,
-                        tmpyl_Generic_Function_Obj *c_func)
+                        const tmpyl_GenericFunctionObj * const c_func)
 {
     /*  Declare necessary variables.                                          */
     PyObject *x;
@@ -853,7 +925,7 @@ tmpl_Get_Py_Func_From_C(PyObject *self, PyObject *args,
 
 #if TMPYL_HAS_NUMPY == 1
     else if (PyArray_Check(x))
-        return tmpyl_Get_Py_Out_From_NumpyArray(x, c_func);
+        return tmpyl_Get_Py_Out_From_Numpy_Array(x, c_func);
 #endif
     goto FAILURE;
 
