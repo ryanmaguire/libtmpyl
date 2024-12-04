@@ -91,6 +91,7 @@
 #include "tmpyl_sinc_method.h"
 #include "tmpyl_sind_method.h"
 #include "tmpyl_sqrt_method.h"
+#include "tmpyl_trunc_method.h"
 
 /*  All of the methods of the tmpyl module are defined in this array.         */
 static PyMethodDef tmpyl_methods[] =
@@ -118,6 +119,7 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_SINC_METHOD,
     TMPYL_SIND_METHOD,
     TMPYL_SQRT_METHOD,
+    TMPYL_TRUNC_METHOD,
     {NULL, NULL, 0, NULL}
 };
 
