@@ -91,6 +91,7 @@
 #include "tmpyl_sinc_method.h"
 #include "tmpyl_sincpi_method.h"
 #include "tmpyl_sind_method.h"
+#include "tmpyl_sinpi_method.h"
 #include "tmpyl_sqrt_method.h"
 #include "tmpyl_trunc_method.h"
 
@@ -120,6 +121,7 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_SINC_METHOD,
     TMPYL_SINCPI_METHOD,
     TMPYL_SIND_METHOD,
+    TMPYL_SINPI_METHOD,
     TMPYL_SQRT_METHOD,
     TMPYL_TRUNC_METHOD,
     {NULL, NULL, 0, NULL}
