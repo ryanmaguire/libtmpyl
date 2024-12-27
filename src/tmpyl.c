@@ -89,6 +89,7 @@
 #include "tmpyl_normalized_fresnel_cos_method.h"
 #include "tmpyl_normalized_fresnel_sin_method.h"
 #include "tmpyl_sinc_method.h"
+#include "tmpyl_sincpi_method.h"
 #include "tmpyl_sind_method.h"
 #include "tmpyl_sqrt_method.h"
 #include "tmpyl_trunc_method.h"
@@ -117,6 +118,7 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_NORMALIZED_FRESNEL_COS_METHOD,
     TMPYL_NORMALIZED_FRESNEL_SIN_METHOD,
     TMPYL_SINC_METHOD,
+    TMPYL_SINCPI_METHOD,
     TMPYL_SIND_METHOD,
     TMPYL_SQRT_METHOD,
     TMPYL_TRUNC_METHOD,

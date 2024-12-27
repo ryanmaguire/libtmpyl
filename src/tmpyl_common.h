@@ -72,6 +72,7 @@ extern PyObject *tmpyl_mod_360(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_normalized_fresnel_cos(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_normalized_fresnel_sin(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_sinc(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_sincpi(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_sind(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_sqrt(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_trunc(PyObject *self, PyObject *args);
