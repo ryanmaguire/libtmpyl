@@ -23,23 +23,41 @@
     "sqrt",                                                                    \
     tmpyl_sqrt,                                                                \
     METH_VARARGS,                                                              \
-    "\r\t"                                                                     \
-    "Function:\n\r\t\t"                                                        \
-    "tmpyl.sqrt\n\r\t"                                                         \
-    "Purpose:\n\r\t\t"                                                         \
-    "Compute the square root of the input."                                    \
-    "\n\r\tArguments\n\r\t\t"                                                  \
-    "x:\n\r\t\t\t"                                                             \
-    "Independent variable for sqrt(x). Allowed inputs are int,\n\r\t\t\t"      \
-    "float, complex, list (of ints, floats, and complex),\n\r\t\t\t"           \
-    "and numpy arrays (if tmpyl was built with numpy support).\n\r\t"          \
-    "Outputs:\n\r\t\t"                                                         \
-    "sqrt_x:\n\r\t\t\t"                                                        \
-    "The inverse tangent as a function of x. Same type as input.\n\r\t"        \
-    "Example:\n\r\t\t"                                                         \
-    ">>> import numpy\n\r\t\t"                                                 \
-    ">>> import tmpyl\n\r\t\t"                                                 \
-    ">>> x = numpy.arange(0,100,0.01)\n\r\t\t"                                 \
+    "\r"                                                                       \
+    "Function:"                                                                \
+    "\n\r    "                                                                 \
+    "tmpyl.sqrt"                                                               \
+    "\n\r"                                                                     \
+    "Purpose:"                                                                 \
+    "\n\r    "                                                                 \
+    "Computes the square root of the input."                                   \
+    "\n\r"                                                                     \
+    "Arguments"                                                                \
+    "\n\r    "                                                                 \
+    "x:"                                                                       \
+    "\n\r        "                                                             \
+    "The independent variable (int, float, complex, list, or numpy array)."    \
+    "\n\r"                                                                     \
+    "Outputs:"                                                                 \
+    "\n\r    "                                                                 \
+    "sqrt_x:"                                                                  \
+    "\n\r        "                                                             \
+    "The square root of x."                                                    \
+    "\n\r"                                                                     \
+    "Notes:"                                                                   \
+    "\n\r    "                                                                 \
+    "For complex arguments the branch cut occurs along the negative"           \
+    "\n\r    "                                                                 \
+    "real axis."                                                               \
+    "\n\r"                                                                     \
+    "Example:"                                                                 \
+    "\n\r    "                                                                 \
+    ">>> import numpy"                                                         \
+    "\n\r    "                                                                 \
+    ">>> import tmpyl"                                                         \
+    "\n\r    "                                                                 \
+    ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
+    "\n\r    "                                                                 \
     ">>> y = tmpyl.sqrt(x)"                                                    \
 }
 #endif

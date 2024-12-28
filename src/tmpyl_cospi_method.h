@@ -16,21 +16,21 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************/
-#ifndef TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD                                                       \
+#ifndef TMPYL_COSPI_METHOD_H
+#define TMPYL_COSPI_METHOD_H
+#define TMPYL_COSPI_METHOD                                                     \
 {                                                                              \
-    "exp",                                                                     \
-    tmpyl_exp,                                                                 \
+    "cospi",                                                                   \
+    tmpyl_cospi,                                                               \
     METH_VARARGS,                                                              \
     "\r"                                                                       \
     "Function:"                                                                \
     "\n\r    "                                                                 \
-    "tmpyl.exp"                                                                \
+    "tmpyl.cospi"                                                              \
     "\n\r"                                                                     \
     "Purpose:"                                                                 \
     "\n\r    "                                                                 \
-    "Computes the exponential function."                                       \
+    "Computes the cosine of pi times the input."                               \
     "\n\r"                                                                     \
     "Arguments"                                                                \
     "\n\r    "                                                                 \
@@ -40,9 +40,9 @@
     "\n\r"                                                                     \
     "Outputs:"                                                                 \
     "\n\r    "                                                                 \
-    "exp_x:"                                                                   \
+    "cospi_x:"                                                                 \
     "\n\r        "                                                             \
-    "The exponential of x, e^x."                                               \
+    "The cosine of pi times x."                                                \
     "\n\r"                                                                     \
     "Example:"                                                                 \
     "\n\r    "                                                                 \
@@ -52,6 +52,6 @@
     "\n\r    "                                                                 \
     ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
     "\n\r    "                                                                 \
-    ">>> y = tmpyl.exp(x)"                                                     \
+    ">>> y = tmpyl.cospi(x)"                                                   \
 }
 #endif

@@ -18,8 +18,8 @@
  ******************************************************************************/
 #include "tmpyl_common.h"
 
-/*  Python wrapper for the Bessel I0 function from libtmpl.                   */
-PyObject *tmpyl_besselI0(PyObject *self, PyObject *args)
+/*  Python wrapper for the ceiling function from libtmpl.                     */
+PyObject *tmpyl_ceil(PyObject *self, PyObject *args)
 {
     /*  Function object that will contain all of the function pointers.       */
     tmpyl_GenericFunctionObj c_funcs;
@@ -28,9 +28,9 @@ PyObject *tmpyl_besselI0(PyObject *self, PyObject *args)
     c_funcs.l2l = NULL;
 
     /*  Real valued functions that take real arguments.                       */
-    c_funcs.f2f = tmpl_Float_Bessel_I0;
-    c_funcs.d2d = tmpl_Double_Bessel_I0;
-    c_funcs.ld2ld = tmpl_LDouble_Bessel_I0;
+    c_funcs.f2f = tmpl_Float_Ceil;
+    c_funcs.d2d = tmpl_Double_Ceil;
+    c_funcs.ld2ld = tmpl_LDouble_Ceil;
 
     /*  Real valued functions that take complex arguments.                    */
     c_funcs.cf2f = NULL;
@@ -48,8 +48,8 @@ PyObject *tmpyl_besselI0(PyObject *self, PyObject *args)
     c_funcs.cld2cld = NULL;
 
     /*  Name of the function.                                                 */
-    c_funcs.func_name = "besselI0";
+    c_funcs.func_name = "ceil";
 
     return tmpl_Get_Py_Func_From_C(self, args, &c_funcs);
 }
-/*  End of tmpyl_besselI0.                                                    */
+/*  End of tmpyl_ceil.                                                        */

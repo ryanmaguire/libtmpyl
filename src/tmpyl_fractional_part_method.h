@@ -16,33 +16,33 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************/
-#ifndef TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD                                                       \
+#ifndef TMPYL_FRACTIONAL_PART_METHOD_H
+#define TMPYL_FRACTIONAL_PART_METHOD_H
+#define TMPYL_FRACTIONAL_PART_METHOD                                           \
 {                                                                              \
-    "exp",                                                                     \
-    tmpyl_exp,                                                                 \
+    "fractional_part",                                                         \
+    tmpyl_fractional_part,                                                     \
     METH_VARARGS,                                                              \
     "\r"                                                                       \
     "Function:"                                                                \
     "\n\r    "                                                                 \
-    "tmpyl.exp"                                                                \
+    "tmpyl.fractional_part"                                                    \
     "\n\r"                                                                     \
     "Purpose:"                                                                 \
     "\n\r    "                                                                 \
-    "Computes the exponential function."                                       \
+    "Computes the fractional part of the input."                               \
     "\n\r"                                                                     \
     "Arguments"                                                                \
     "\n\r    "                                                                 \
     "x:"                                                                       \
     "\n\r        "                                                             \
-    "The independent variable (int, float, complex, list, or numpy array)."    \
+    "The independent variable (int, float, list, or numpy array)."             \
     "\n\r"                                                                     \
     "Outputs:"                                                                 \
     "\n\r    "                                                                 \
-    "exp_x:"                                                                   \
+    "frac_x:"                                                                  \
     "\n\r        "                                                             \
-    "The exponential of x, e^x."                                               \
+    "The fractional part of x."                                                \
     "\n\r"                                                                     \
     "Example:"                                                                 \
     "\n\r    "                                                                 \
@@ -52,6 +52,6 @@
     "\n\r    "                                                                 \
     ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
     "\n\r    "                                                                 \
-    ">>> y = tmpyl.exp(x)"                                                     \
+    ">>> y = tmpyl.fractional_part(x)"                                         \
 }
 #endif

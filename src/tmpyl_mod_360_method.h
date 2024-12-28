@@ -23,23 +23,35 @@
     "mod_360",                                                                 \
     tmpyl_mod_360,                                                             \
     METH_VARARGS,                                                              \
-    "\r\t"                                                                     \
-    "Function:\n\r\t\t"                                                        \
-    "tmpyl.mod_360\n\r\t"                                                      \
-    "Purpose:\n\r\t\t"                                                         \
-    "Compute the remainder after division of the input by 360."                \
-    "\n\r\tArguments\n\r\t\t"                                                  \
-    "x:\n\r\t\t\t"                                                             \
-    "Independent variable for |x|. Allowed inputs are int,\n\r\t\t\t"          \
-    "float, list (of ints and floats),\n\r\t\t\t"                              \
-    "and numpy arrays (if tmpyl was built with numpy support).\n\r\t"          \
-    "Outputs:\n\r\t\t"                                                         \
-    "x_mod_360:\n\r\t\t\t"                                                     \
-    "The remainder of x after division by 360. Same type as input.\n\r\t"      \
-    "Example:\n\r\t\t"                                                         \
-    ">>> import numpy\n\r\t\t"                                                 \
-    ">>> import tmpyl\n\r\t\t"                                                 \
-    ">>> x = numpy.arange(0,100,0.01)\n\r\t\t"                                 \
+    "\r"                                                                       \
+    "Function:"                                                                \
+    "\n\r    "                                                                 \
+    "tmpyl.mod_360"                                                            \
+    "\n\r"                                                                     \
+    "Purpose:"                                                                 \
+    "\n\r    "                                                                 \
+    "Computes the remainder after division of the input by 360."               \
+    "\n\r"                                                                     \
+    "Arguments"                                                                \
+    "\n\r    "                                                                 \
+    "x:"                                                                       \
+    "\n\r        "                                                             \
+    "The independent variable (int, float, complex, list, or numpy array)."    \
+    "\n\r"                                                                     \
+    "Outputs:"                                                                 \
+    "\n\r    "                                                                 \
+    "mod360_x:"                                                                \
+    "\n\r        "                                                             \
+    "The value x mod 360."                                                     \
+    "\n\r"                                                                     \
+    "Example:"                                                                 \
+    "\n\r    "                                                                 \
+    ">>> import numpy"                                                         \
+    "\n\r    "                                                                 \
+    ">>> import tmpyl"                                                         \
+    "\n\r    "                                                                 \
+    ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
+    "\n\r    "                                                                 \
     ">>> y = tmpyl.mod_360(x)"                                                 \
 }
 #endif

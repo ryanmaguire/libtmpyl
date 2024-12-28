@@ -23,23 +23,35 @@
     "floor",                                                                   \
     tmpyl_floor,                                                               \
     METH_VARARGS,                                                              \
-    "\r\t"                                                                     \
-    "Function:\n\r\t\t"                                                        \
-    "tmpyl.floor\n\r\t"                                                        \
-    "Purpose:\n\r\t\t"                                                         \
-    "Compute the floor function."                                              \
-    "\n\r\tArguments\n\r\t\t"                                                  \
-    "x:\n\r\t\t\t"                                                             \
-    "Independent variable for floor(x). Allowed inputs are int,\n\r\t\t\t"     \
-    "float, complex, list (of ints, floats, and complex),\n\r\t\t\t"           \
-    "and numpy arrays (if tmpyl was built with numpy support).\n\r\t"          \
-    "Outputs:\n\r\t\t"                                                         \
-    "floor_x:\n\r\t\t\t"                                                       \
-    "The floor of the input x. Same type as input.\n\r\t"                      \
-    "Example:\n\r\t\t"                                                         \
-    ">>> import numpy\n\r\t\t"                                                 \
-    ">>> import tmpyl\n\r\t\t"                                                 \
-    ">>> x = numpy.arange(0,100,0.01)\n\r\t\t"                                 \
+    "\r"                                                                       \
+    "Function:"                                                                \
+    "\n\r    "                                                                 \
+    "tmpyl.floor"                                                              \
+    "\n\r"                                                                     \
+    "Purpose:"                                                                 \
+    "\n\r    "                                                                 \
+    "Computes the floor of the input."                                         \
+    "\n\r"                                                                     \
+    "Arguments"                                                                \
+    "\n\r    "                                                                 \
+    "x:"                                                                       \
+    "\n\r        "                                                             \
+    "The independent variable (int, float, list, or numpy array)."             \
+    "\n\r"                                                                     \
+    "Outputs:"                                                                 \
+    "\n\r    "                                                                 \
+    "floor_x:"                                                                 \
+    "\n\r        "                                                             \
+    "The floor of x."                                                          \
+    "\n\r"                                                                     \
+    "Example:"                                                                 \
+    "\n\r    "                                                                 \
+    ">>> import numpy"                                                         \
+    "\n\r    "                                                                 \
+    ">>> import tmpyl"                                                         \
+    "\n\r    "                                                                 \
+    ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
+    "\n\r    "                                                                 \
     ">>> y = tmpyl.floor(x)"                                                   \
 }
 #endif

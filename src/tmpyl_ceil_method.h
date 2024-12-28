@@ -16,33 +16,33 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************/
-#ifndef TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD                                                       \
+#ifndef TMPYL_CEIL_METHOD_H
+#define TMPYL_CEIL_METHOD_H
+#define TMPYL_CEIL_METHOD                                                      \
 {                                                                              \
-    "exp",                                                                     \
-    tmpyl_exp,                                                                 \
+    "ceil",                                                                    \
+    tmpyl_ceil,                                                                \
     METH_VARARGS,                                                              \
     "\r"                                                                       \
     "Function:"                                                                \
     "\n\r    "                                                                 \
-    "tmpyl.exp"                                                                \
+    "tmpyl.ceil"                                                               \
     "\n\r"                                                                     \
     "Purpose:"                                                                 \
     "\n\r    "                                                                 \
-    "Computes the exponential function."                                       \
+    "Computes the ceiling of the input."                                       \
     "\n\r"                                                                     \
     "Arguments"                                                                \
     "\n\r    "                                                                 \
     "x:"                                                                       \
     "\n\r        "                                                             \
-    "The independent variable (int, float, complex, list, or numpy array)."    \
+    "The independent variable (int, float, list, or numpy array)."             \
     "\n\r"                                                                     \
     "Outputs:"                                                                 \
     "\n\r    "                                                                 \
-    "exp_x:"                                                                   \
+    "ceil_x:"                                                                  \
     "\n\r        "                                                             \
-    "The exponential of x, e^x."                                               \
+    "The ceiling of x."                                                        \
     "\n\r"                                                                     \
     "Example:"                                                                 \
     "\n\r    "                                                                 \
@@ -52,6 +52,6 @@
     "\n\r    "                                                                 \
     ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
     "\n\r    "                                                                 \
-    ">>> y = tmpyl.exp(x)"                                                     \
+    ">>> y = tmpyl.ceil(x)"                                                    \
 }
 #endif

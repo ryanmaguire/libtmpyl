@@ -16,33 +16,33 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************/
-#ifndef TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD                                                       \
+#ifndef TMPYL_UNIT_CLAMP_METHOD_H
+#define TMPYL_UNIT_CLAMP_METHOD_H
+#define TMPYL_UNIT_CLAMP_METHOD                                                \
 {                                                                              \
-    "exp",                                                                     \
-    tmpyl_exp,                                                                 \
+    "unit_clamp",                                                              \
+    tmpyl_unit_clamp,                                                          \
     METH_VARARGS,                                                              \
     "\r"                                                                       \
     "Function:"                                                                \
     "\n\r    "                                                                 \
-    "tmpyl.exp"                                                                \
+    "tmpyl.unit_clamp"                                                         \
     "\n\r"                                                                     \
     "Purpose:"                                                                 \
     "\n\r    "                                                                 \
-    "Computes the exponential function."                                       \
+    "Returns x for 0 < x < 1, 0 for x < 0, and 1 for 1 < x."                   \
     "\n\r"                                                                     \
     "Arguments"                                                                \
     "\n\r    "                                                                 \
     "x:"                                                                       \
     "\n\r        "                                                             \
-    "The independent variable (int, float, complex, list, or numpy array)."    \
+    "The independent variable (int, float, list, or numpy array)."             \
     "\n\r"                                                                     \
     "Outputs:"                                                                 \
     "\n\r    "                                                                 \
-    "exp_x:"                                                                   \
+    "clamp_x:"                                                                 \
     "\n\r        "                                                             \
-    "The exponential of x, e^x."                                               \
+    "The clamp of x."                                                          \
     "\n\r"                                                                     \
     "Example:"                                                                 \
     "\n\r    "                                                                 \
@@ -50,8 +50,8 @@
     "\n\r    "                                                                 \
     ">>> import tmpyl"                                                         \
     "\n\r    "                                                                 \
-    ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
+    ">>> x = numpy.arange(-1.0, 1.0, 0.01)"                                    \
     "\n\r    "                                                                 \
-    ">>> y = tmpyl.exp(x)"                                                     \
+    ">>> y = tmpyl.unit_clamp(x)"                                              \
 }
 #endif

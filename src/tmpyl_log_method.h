@@ -23,23 +23,35 @@
     "log",                                                                     \
     tmpyl_log,                                                                 \
     METH_VARARGS,                                                              \
-    "\r\t"                                                                     \
-    "Function:\n\r\t\t"                                                        \
-    "tmpyl.log\n\r\t"                                                          \
-    "Purpose:\n\r\t\t"                                                         \
-    "Compute the log base e of the input."                                     \
-    "\n\r\tArguments\n\r\t\t"                                                  \
-    "x:\n\r\t\t\t"                                                             \
-    "Independent variable for log(x). Allowed inputs are int,\n\r\t\t\t"       \
-    "float, complex, list (of ints, floats, and complex),\n\r\t\t\t"           \
-    "and numpy arrays (if tmpyl was built with numpy support).\n\r\t"          \
-    "Outputs:\n\r\t\t"                                                         \
-    "log_x:\n\r\t\t\t"                                                         \
-    "Natural log of the input. Same type as input.\n\r\t"                      \
-    "Example:\n\r\t\t"                                                         \
-    ">>> import numpy\n\r\t\t"                                                 \
-    ">>> import tmpyl\n\r\t\t"                                                 \
-    ">>> x = numpy.arange(0,100,0.01)\n\r\t\t"                                 \
+    "\r"                                                                       \
+    "Function:"                                                                \
+    "\n\r    "                                                                 \
+    "tmpyl.log"                                                                \
+    "\n\r"                                                                     \
+    "Purpose:"                                                                 \
+    "\n\r    "                                                                 \
+    "Computes the natural logarithm of the input."                             \
+    "\n\r"                                                                     \
+    "Arguments"                                                                \
+    "\n\r    "                                                                 \
+    "x:"                                                                       \
+    "\n\r        "                                                             \
+    "The independent variable (int, float, complex, list, or numpy array)."    \
+    "\n\r"                                                                     \
+    "Outputs:"                                                                 \
+    "\n\r    "                                                                 \
+    "log_x:"                                                                   \
+    "\n\r        "                                                             \
+    "The log base e of x."                                                     \
+    "\n\r"                                                                     \
+    "Example:"                                                                 \
+    "\n\r    "                                                                 \
+    ">>> import numpy"                                                         \
+    "\n\r    "                                                                 \
+    ">>> import tmpyl"                                                         \
+    "\n\r    "                                                                 \
+    ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
+    "\n\r    "                                                                 \
     ">>> y = tmpyl.log(x)"                                                     \
 }
 #endif

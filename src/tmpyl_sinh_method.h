@@ -16,21 +16,21 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************/
-#ifndef TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD_H
-#define TMPYL_EXP_METHOD                                                       \
+#ifndef TMPYL_SINH_METHOD_H
+#define TMPYL_SINH_METHOD_H
+#define TMPYL_SINH_METHOD                                                      \
 {                                                                              \
-    "exp",                                                                     \
-    tmpyl_exp,                                                                 \
+    "sinh",                                                                    \
+    tmpyl_sinh,                                                                \
     METH_VARARGS,                                                              \
     "\r"                                                                       \
     "Function:"                                                                \
     "\n\r    "                                                                 \
-    "tmpyl.exp"                                                                \
+    "tmpyl.sinh"                                                               \
     "\n\r"                                                                     \
     "Purpose:"                                                                 \
     "\n\r    "                                                                 \
-    "Computes the exponential function."                                       \
+    "Computes the hyperbolic sine of the input."                               \
     "\n\r"                                                                     \
     "Arguments"                                                                \
     "\n\r    "                                                                 \
@@ -40,9 +40,9 @@
     "\n\r"                                                                     \
     "Outputs:"                                                                 \
     "\n\r    "                                                                 \
-    "exp_x:"                                                                   \
+    "sinh_x:"                                                                  \
     "\n\r        "                                                             \
-    "The exponential of x, e^x."                                               \
+    "The hyperbolic sine of x."                                                \
     "\n\r"                                                                     \
     "Example:"                                                                 \
     "\n\r    "                                                                 \
@@ -52,6 +52,6 @@
     "\n\r    "                                                                 \
     ">>> x = numpy.arange(-10.0, 10.0, 0.01)"                                  \
     "\n\r    "                                                                 \
-    ">>> y = tmpyl.exp(x)"                                                     \
+    ">>> y = tmpyl.sinh(x)"                                                    \
 }
 #endif

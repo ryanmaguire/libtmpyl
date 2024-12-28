@@ -72,14 +72,18 @@
 #include "tmpyl_acos_method.h"
 #include "tmpyl_asin_method.h"
 #include "tmpyl_atan_method.h"
-#include "tmpyl_besselI0_method.h"
-#include "tmpyl_besselJ0_method.h"
+#include "tmpyl_bessel_i0_method.h"
+#include "tmpyl_bessel_j0_method.h"
 #include "tmpyl_cbrt_method.h"
+#include "tmpyl_ceil_method.h"
 #include "tmpyl_cos_method.h"
 #include "tmpyl_cosd_method.h"
+#include "tmpyl_cosh_method.h"
+#include "tmpyl_cospi_method.h"
 #include "tmpyl_erf_method.h"
 #include "tmpyl_exp_method.h"
 #include "tmpyl_floor_method.h"
+#include "tmpyl_fractional_part_method.h"
 #include "tmpyl_fresnel_cos_method.h"
 #include "tmpyl_fresnel_sin_method.h"
 #include "tmpyl_lambertw_method.h"
@@ -88,12 +92,17 @@
 #include "tmpyl_mod_360_method.h"
 #include "tmpyl_normalized_fresnel_cos_method.h"
 #include "tmpyl_normalized_fresnel_sin_method.h"
+#include "tmpyl_sin_method.h"
 #include "tmpyl_sinc_method.h"
 #include "tmpyl_sincpi_method.h"
 #include "tmpyl_sind_method.h"
+#include "tmpyl_sinh_method.h"
 #include "tmpyl_sinpi_method.h"
 #include "tmpyl_sqrt_method.h"
+#include "tmpyl_tan_method.h"
+#include "tmpyl_tanh_method.h"
 #include "tmpyl_trunc_method.h"
+#include "tmpyl_unit_clamp_method.h"
 
 /*  All of the methods of the tmpyl module are defined in this array.         */
 static PyMethodDef tmpyl_methods[] =
@@ -102,14 +111,18 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_ACOS_METHOD,
     TMPYL_ASIN_METHOD,
     TMPYL_ATAN_METHOD,
-    TMPYL_BESSELI0_METHOD,
-    TMPYL_BESSELJ0_METHOD,
+    TMPYL_BESSEL_I0_METHOD,
+    TMPYL_BESSEL_J0_METHOD,
     TMPYL_CBRT_METHOD,
+    TMPYL_CEIL_METHOD,
     TMPYL_COS_METHOD,
     TMPYL_COSD_METHOD,
+    TMPYL_COSH_METHOD,
+    TMPYL_COSPI_METHOD,
     TMPYL_ERF_METHOD,
     TMPYL_EXP_METHOD,
     TMPYL_FLOOR_METHOD,
+    TMPYL_FRACTIONAL_PART_METHOD,
     TMPYL_FRESNEL_COS_METHOD,
     TMPYL_FRESNEL_SIN_METHOD,
     TMPYL_LAMBERTW_METHOD,
@@ -118,12 +131,17 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_MOD_360_METHOD,
     TMPYL_NORMALIZED_FRESNEL_COS_METHOD,
     TMPYL_NORMALIZED_FRESNEL_SIN_METHOD,
+    TMPYL_SIN_METHOD,
     TMPYL_SINC_METHOD,
     TMPYL_SINCPI_METHOD,
     TMPYL_SIND_METHOD,
+    TMPYL_SINH_METHOD,
     TMPYL_SINPI_METHOD,
     TMPYL_SQRT_METHOD,
+    TMPYL_TAN_METHOD,
+    TMPYL_TANH_METHOD,
     TMPYL_TRUNC_METHOD,
+    TMPYL_UNIT_CLAMP_METHOD,
     {NULL, NULL, 0, NULL}
 };
 
@@ -132,7 +150,32 @@ static PyMethodDef tmpyl_methods[] =
 static struct PyModuleDef moduledef = {
     PyModuleDef_HEAD_INIT,
     "tmpyl",
-    NULL,
+    "\rThe Mathematicians Programming Library.\n"
+    "\rThis is a Python wrapper for the C library libtmpl.\n\n"
+    "\rIt provides functions commonly used in mathematics and physics,\n"
+    "\rincluding a full implementation of libm (the C mathematical library),\n"
+    "\rcomplex numbers, quaternions, double-double arithmetic, 2D, 3D, 4D,\n"
+    "\r6D and arbitrary dimensional real and complex vectors, integer\n"
+    "\rroutines common in number theory, knot theory tools, matrices and\n"
+    "\rlinear algebra, Fresnel diffraction, Fraunhaufor diffraction,\n"
+    "\rgeometry tools, functions common in optics and astronomy,\n"
+    "\rsorting routines, functions for generating rasterized PPM graphics\n"
+    "\rand vectorized SVG figures. FFT routines and many special functions\n"
+    "\rare also provided.\n\n"
+    "\rPlease note that not all of libtmpl is currently available in tmpyl.\n"
+    "\rBoth libtmpl and libtmpyl are actively worked on, and tmpyl is\n"
+    "\rgradually catching up.\n\n"
+#if TMPYL_HAS_NUMPY == 1
+    "\rThe version of tmpyl you have installed was compiled with numpy\n"
+    "\rsupport. You may use numpy arrays with real or complex arguments\n"
+    "\rwith many of tmpyl's functions.\n",
+#else
+    "\rThe version of tmpyl you have installed was not compiled with numpy\n"
+    "\rsupport. You may not use numpy arrays with tmpyl's functions.\n"
+    "\rIf you would like numpy support, please make sure numpy is installed\n"
+    "\rand then recompile tmpyl from its source:\n"
+    "\r\thttps://github.com/ryanmaguire/libtmpyl\n",
+#endif
     -1,
     tmpyl_methods,
     NULL,
