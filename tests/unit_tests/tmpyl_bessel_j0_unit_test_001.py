@@ -22,6 +22,7 @@
 ################################################################################
 """
 
+# pylint: disable = c-extension-no-member, invalid-name
 import sys
 import tmpyl
 
@@ -29,7 +30,7 @@ import tmpyl
 EPS = 1.0E-16
 
 # The function we're testing.
-FUNC = tmpyl.besselJ0
+FUNC = tmpyl.bessel_j0
 
 # The value at zero.
 VAL = 1.0

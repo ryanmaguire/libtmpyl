@@ -18,44 +18,32 @@
 #   along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.         #
 ################################################################################
 #   Author:     Ryan Maguire                                                   #
-#   Date:       January 28, 2022.                                              #
+#   Date:       December 28, 2024.                                             #
 ################################################################################
 """
 
-# pylint: disable = c-extension-no-member
-import sys
-import tmpyl
+import unittests
 
-# Allowed error for function.
-EPS = 1.0E-16
-
-# The function we're testing.
-FUNC = tmpyl.bessel_j0
-
-# The value at zero.
-VAL = 1.0
-
-# ImportError became ModuleNotFoundError in Python 3.6. Check the version first.
-if sys.version_info[0] > 2 and sys.version_info[1] > 5:
-
-    # If numpy is not available, we'll specify this with the macro
-    # TMPYL_HAS_NUMPY by setting it to zero.
-    try:
-        import numpy
-    except ModuleNotFoundError:
-        sys.exit("numpy is not installed.")
-
-# For older versions, use ImportError.
-else:
-
-    # Again, check if numpy is available.
-    try:
-        import numpy
-    except ImportError:
-        sys.exit("numpy is not installed.")
-
-# Can bessel_j0 handle arrays of floats?
-if max(abs(FUNC(numpy.zeros(10)) - VAL)) > EPS:
-    sys.exit("FAIL: Array of Zeros")
-
-print("PASS")
+def fresnel_cos(x_val):
+    """
+        Function:
+            fresnel_cos
+        Purpose:
+            Computes the normalized Fresnel cosine function.
+        Arguments:
+            x_val:
+                The independent variable. A real number.
+        Output:
+            C_x:
+                The normalized Fresnel Cosine evaluated at x.
+        Method:
+            Use the complex error function
+            formula for the Fresnel functions.
+    """
+    pi_factor = unittests.mpmath.sqrt(unittests.mpmath.pi()) / 2
+    plus_scale = unittests.mpmath.mpc(1 + 1j)
+    minus_scale = unittests.mpmath.mpc(1 - 1j)
+    factor = unittests.mpmath.mpf(x_val) * pi_factor
+    left = minus_scale * unittests.mpmath.erf(plus_scale * factor)
+    right = plus_scale * unittests.mpmath.erf(minus_scale * factor)
+    return (left + right).real / 4
