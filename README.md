@@ -2,14 +2,13 @@
 Python wrapper for libtmpl.
 
 # Building
-`tmpyl` can be build with or without `numpy` support, but having
+`tmpyl` can be built with or without `numpy` support, but having
 `numpy` installed is highly recommended. Various mathematical functions
 in `tmpyl` provide support for `numpy` arrays, but this is only available
-if `numpy` is installed during build-time.
-
+if `numpy` is installed during **build-time**.
 
 ## Get the source.
-Close the repo:
+Clone the repo:
 ```
 git clone https://github.com/ryanmaguire/libtmpyl.git
 ```
