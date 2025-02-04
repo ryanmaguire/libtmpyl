@@ -96,12 +96,9 @@ static PyObject *
 tmpyl_Get_Py_Out_From_Numpy_Array(PyObject * const x,
                                   const tmpyl_GenericFunctionObj * const c_func)
 {
-    /*  Variable for indexing, and a variable for the length of the array.    */
+    /*  Signed and unsigned variables for the dimensions of the numpy array.  */
     size_t dim;
     npy_intp np_dim;
-
-    /*  One of the functions wants the address of a SIGNED long integer.      */
-    long int signed_dim;
 
     /*  The data in a numpy array is returned as a void pointer.              */
     const void *data;
@@ -489,8 +486,7 @@ tmpyl_Get_Py_Out_From_Numpy_Array(PyObject * const x,
     }
     /*  End of switch (typenum).                                              */
 
-    signed_dim = (long int)dim;
-    output = PyArray_SimpleNewFromData(1, &signed_dim, typenum, out);
+    output = PyArray_SimpleNewFromData(1, &np_dim, typenum, out);
     capsule = PyCapsule_New(out, NULL, tmpyl_capsule_cleanup);
 
     /*  This frees the variable at the Python level once it's destroyed.  */
@@ -837,9 +833,9 @@ tmpyl_Get_Py_Out_From_List(PyObject * const x,
 {
     PyObject *nth_item;
     PyObject *current_item;
-    long int dim = PyList_Size(x);
+    Py_ssize_t dim = PyList_Size(x);
     PyObject *output = PyList_New(dim);
-    long int n;
+    Py_ssize_t n;
 
     for (n = 0; n < dim; ++n)
     {
