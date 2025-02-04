@@ -44,8 +44,18 @@ except ImportError:
     from distutils.core import setup, Extension
 
 import subprocess
+import site
 import sys
 import os
+
+# For reasons beyond me, on Windows and macOS the site_packages directory is
+# occasionally not included in the Python PATH. This is probably related to
+# how the user installed Python (Did they use the Windows Store? The Python
+# website? macOS developer tools? homebrew?). On FreeBSD and Linux the issue
+# only appears if running in a virtual environment (i.e. python -m venv ...).
+# Adding the site_packages directory to the systme path fixes the issue.
+for site in site.getsitepackages():
+    sys.path.append(site)
 
 # ImportError became ModuleNotFoundError in Python 3.6. Check the version first.
 if sys.version_info[0] > 2 and sys.version_info[1] > 5:

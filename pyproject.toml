@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tmpyl"
+description = "Python wrapper for the C library libtmpl."
+version = "2025.02.04"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["math", "libm", "complex numbers", "vectors"]
+requires-python = ">= 3.2"
+authors = [
+    {name = "Ryan Maguire", email = "rmaguire@protonmail.com"}
+]
+maintainers = [
+    {name = "Ryan Maguire", email = "rmaguire@protonmail.com"}
+]
+
+[project.optional-dependencies]
+numpy = ["numpy"]
