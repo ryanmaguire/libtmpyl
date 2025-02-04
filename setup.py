@@ -37,7 +37,13 @@
 ################################################################################
 """
 
-from distutils.core import setup, Extension
+# Python is swapping distutils with setuptools.
+try:
+    from setuptools import setup, Extension
+except ImportError:
+    from distutils.core import setup, Extension
+
+import subprocess
 import sys
 import os
 
@@ -66,10 +72,22 @@ else:
         include = []
         tmpyl_macros = [("TMPYL_HAS_NUMPY", 0)]
 
-if os.path.isfile("/usr/local/lib/libtmpl.so"):
-    libs=['/usr/local/lib']
+
+
+if os.name == "nt":
+    include.append(".\\")
+    os.chdir(".\\libtmpl")
+    subprocess.call(["make.bat"])
+    libs = [".\\libtmpl\\libtmpl.lib"]
+    os.chdir("..\\")
+
 else:
-    sys.exit("Error: libtmpl file (libtmpl.so or libtmpl.lib) not found.")
+    include.append("./")
+    os.chdir("./libtmpl/")
+    subprocess.call(["make", "-j", "BUILD_STATIC=1"])
+    libs = ["./libtmpl/libtmpl.a"]
+    os.chdir("../")
+
 
 # List of files to be compiled for tmpyl.
 srclist = []
@@ -84,17 +102,19 @@ for file in os.listdir("src/"):
 optional_args = []
 
 # Create the module.
-setup(name='tmpyl',
-      version='0.1',
-      description='Python Extension Module for the C Library libtmpl',
-      author='Ryan Maguire',
-      ext_modules=[
-          Extension('tmpyl',
-                    srclist,
-                    extra_compile_args=optional_args,
-                    define_macros=tmpyl_macros,
-                    include_dirs=include,
-                    library_dirs=libs,
-                    libraries=['tmpl'])
-          ]
-     )
+setup(
+    name = 'tmpyl',
+    version = '0.1',
+    description = 'Python Extension Module for the C Library libtmpl',
+    author = 'Ryan Maguire',
+    ext_modules = [
+          Extension(
+            'tmpyl',
+            srclist,
+            extra_compile_args = optional_args,
+            define_macros = tmpyl_macros,
+            include_dirs = include,
+            extra_objects = libs
+        )
+    ]
+)
