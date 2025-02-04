@@ -25,4 +25,4 @@
 import scipy.special as sf
 import tmpyl
 import timetest
-timetest.timetest(-5.0E2, 5.0E2, int(1E8), tmpyl.besselI0, sf.i0)
+timetest.timetest(-5.0E2, 5.0E2, int(1E8), tmpyl.bessel_i0, sf.i0)
