@@ -8,11 +8,11 @@ in `tmpyl` provide support for `numpy` arrays, but this is only available
 if `numpy` is installed during **build-time**.
 
 ## Get the source.
-Clone the repo:
+Clone the repo
 ```
 git clone https://github.com/ryanmaguire/libtmpyl.git
 ```
-Initialize submodules:
+Initialize submodules
 ```
 git submodule init
 git pull --recurse-submodules
@@ -24,7 +24,7 @@ git pull --recurse-submodules
 ```
 python3 -m pip install --upgrade pip
 ```
-On certain Linux distributions you may need to add `--break-system-packages`:
+On certain Linux distributions you may need to add `--break-system-packages`
 ```
 python3 -m pip install --upgrade pip --break-system-packages
 ```
@@ -79,7 +79,7 @@ py -m pip install .
 
 ## Build Instructions (Virtual Environment)
 
-You may optional repeat all of this in a virtual environment.
+You may optionally repeat all of this in a virtual environment.
 Windows users should change `python3` with `py` in the commands below.
 ```
 python3 -m venv .venv
