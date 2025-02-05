@@ -14,6 +14,7 @@ git clone https://github.com/ryanmaguire/libtmpyl.git
 ```
 Initialize submodules
 ```
+cd libtmpyl
 git submodule init
 git pull --recurse-submodules
 ```
