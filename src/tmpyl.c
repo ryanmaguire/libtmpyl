@@ -72,6 +72,7 @@
 #include "tmpyl_acos_method.h"
 #include "tmpyl_asin_method.h"
 #include "tmpyl_atan_method.h"
+#include "tmpyl_airy_j1_method.h"
 #include "tmpyl_bessel_i0_method.h"
 #include "tmpyl_bessel_j0_method.h"
 #include "tmpyl_bessel_j1_method.h"
@@ -112,6 +113,7 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_ACOS_METHOD,
     TMPYL_ASIN_METHOD,
     TMPYL_ATAN_METHOD,
+    TMPYL_AIRY_J1_METHOD,
     TMPYL_BESSEL_I0_METHOD,
     TMPYL_BESSEL_J0_METHOD,
     TMPYL_BESSEL_J1_METHOD,
