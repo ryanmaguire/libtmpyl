@@ -57,6 +57,7 @@ extern PyObject *tmpyl_atan_pade(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_atan_maclaurin(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_bessel_i0(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_bessel_j0(PyObject *self, PyObject *args);
+extern PyObject *tmpyl_bessel_j1(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_cbrt(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_ceil(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_cos(PyObject *self, PyObject *args);
