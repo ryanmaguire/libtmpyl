@@ -43,10 +43,12 @@ try:
 except ImportError:
     from distutils.core import setup, Extension
 
-import subprocess
-import site
-import sys
 import os
+import site
+import platform
+import subprocess
+import shutil
+import sys
 
 # For reasons beyond me, on Windows and macOS the site_packages directory is
 # occasionally not included in the Python PATH. This is probably related to
@@ -82,38 +84,119 @@ else:
         include = []
         tmpyl_macros = [("TMPYL_HAS_NUMPY", 0)]
 
-if os.name == "nt":
-    include.append(".\\")
-    os.chdir(".\\libtmpl")
-    subprocess.call(["make.bat"])
-    libs = [".\\libtmpl\\libtmpl.lib"]
-    os.chdir("..\\")
+# Add libtmpl to the include path.
+include.append("." + os.sep)
 
-else:
-    include.append("./")
-    os.chdir("./libtmpl/")
-    subprocess.call(["make", "-j", "BUILD_STATIC=1"])
-    libs = ["./libtmpl/libtmpl.a"]
-    os.chdir("../")
+# Check if OpenMP support has been requested.
+USE_OPENMP = os.environ.get('USE_OPENMP') == '1'
 
 # List of files to be compiled for tmpyl.
 srclist = []
 
-for file in os.listdir("src/wrappers/"):
+def add_directory(directory):
+    """
+        Function for adding all of the C files in a
+        given directory to the list of files to be compiled.
+    """
+    full_path = f'src/{directory}/'
+    for file in os.listdir(full_path):
+        if file[-1] == "c":
+            srclist.append(f'{full_path}{file}')
 
-    # Only add .c files.
-    if file[-1] == "c":
-        srclist.append("src/wrappers/%s" % file)
+def openmp_args():
+    """
+        Returns the list of arguments needed by
+        the C compiler to enable OpenMP support.
+    """
+    if not USE_OPENMP:
+        return [], []
 
-for file in os.listdir("src/"):
+    # Microsoft's MSVC compiler supports OpenMP 2.0.
+    if os.name == "nt":
+        return ["/openmp"], []
 
-    # Only add .c files.
-    if file[-1] == "c":
-        srclist.append("src/%s" % file)
+    # OpenMP support is also possible on macOS (but tricky to set up).
+    if platform.system() == "Darwin":
+
+        # The required flags for Apple's clang and GCC differ.
+        c_compiler = os.environ.get("CC", "")
+
+        # GCC on macOS does not need -Xpreprocessor. Adding it breaks the
+        # linker when building with OpenMP support.
+        if "gcc" in c_compiler:
+            return ["-fopenmp"], ["-fopenmp"]
+
+        # Apple's Clang on macOS requires -Xpreprocessor. Omiting results
+        # in an "unsupported option: -fopenmp" error. We also need to add
+        # the path to libomp. The user should specify this directly using
+        # export CPATH="...". Use brew --prefix as a fallback if this is
+        # not set.
+        lflag = "-L" + os.environ.get("CPATH", "$(brew --prefix libomp)/lib")
+        return ["-Xpreprocessor", "-fopenmp"], [lflag, "-lomp"]
+
+    # On GNU / Linux, GCC has OpenMP support by default, and LLVM's clang
+    # has support as well (but you may need to install libomp to use it).
+    return ["-fopenmp"], ["-fopenmp"]
+
+def static_library_paths():
+    """
+        Compiles libtmpl and returns the
+        path to the static library.
+    """
+
+    libtmpl = "." + os.sep + "libtmpl"
+    build = libtmpl + os.sep + "build"
+
+    # Windows users are required to use CMake. GNU, Linux, FreeBSD, and
+    # macOS users may also use CMake.
+    if shutil.which("cmake"):
+
+        static = "-DBUILD_SHARED_LIBS=OFF"
+        cmake_args = ["cmake", "-S", libtmpl, "-B", build, static]
+        command = ["cmake", "--build", build, "--config", "Release", "-j"]
+
+        # Additional flags are needed if OpenMP support is requested.
+        if USE_OPENMP:
+            cmake_args.append("-DOMP=ON")
+
+        # Run CMake to generate the build files.
+        subprocess.run(cmake_args, check = True)
+
+        # Run the build process and compile librssringoccs and libtmpl.
+        subprocess.run(command, check=True)
+
+        # Path for Windows users, note the '\' instead of '/'.
+        if os.name == "nt":
+            return [build + os.sep + "Release" + os.sep + "tmpl.lib"]
+
+        # Path for everyone else.
+        return [build + os.sep + "libtmpl.a"]
+
+    # GNU Make is 'gmake' on FreeBSD. Check for this first.
+    if shutil.which("gmake"):
+        command = ["gmake", libtmpl, "-j", "BUILD_STATIC=1"]
+
+    # GNU Make is simply 'make' on GNU / Linux and macOS.
+    elif shutil.which("make"):
+        command = ["make", libtmpl, "-j", "BUILD_STATIC=1"]
+
+    else:
+        raise RuntimeError("Neither CMake nor GNU Make found. Install one.")
+
+    # gmake and make have nearly identical build steps. The only difference
+    # is the name of the command. This is saved in the 'command' variable.
+    if USE_OPENMP:
+        command.append("OMP=1")
+
+    subprocess.run(command, check = True)
+    return [libtmpl + os.sep + "libtmpl.a"]
+
+add_directory(".")
+add_directory("wrappers")
 
 # Optional arguments for the compiler.
-optional_compiler_args = []
-optional_linker_args = []
+static_libraries = static_library_paths()
+compile_args, linker_args = openmp_args()
 
 # Create the module.
 setup(
@@ -125,11 +208,11 @@ setup(
           Extension(
             'tmpyl',
             srclist,
-            extra_compile_args = optional_compiler_args,
-            extra_link_args = optional_linker_args,
+            extra_compile_args = compile_args,
+            extra_link_args = linker_args,
             define_macros = tmpyl_macros,
             include_dirs = include,
-            extra_objects = libs
+            extra_objects = static_libraries
         )
     ]
 )
