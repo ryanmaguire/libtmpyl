@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpyl.  If not, see <https://www.gnu.org/licenses/>.        *
  ******************************************************************************
- *                               tmpyl_methods                                *
+ *                               tmpyl_wrappers                               *
  ******************************************************************************
  *  Purpose:                                                                  *
  *      Provides the "wrappers" for Python that call the C routines.          *
@@ -25,17 +25,17 @@
  ******************************************************************************
  *  1.) Python.h:                                                             *
  *          Header file that is part of the CPython implementation of the     *
- *          python programming language. It enables use of the Python-C API.  *
+ *          python programming language. It enables use of the C-Python API.  *
  ******************************************************************************
  *  Author:     Ryan Maguire                                                  *
  *  Date:       February 18, 2026                                             *
  ******************************************************************************/
 
 /*  Include guard to prevent including this file twice.                       */
-#ifndef TMPYL_METHODS_H
-#define TMPYL_METHODS_H
+#ifndef TMPYL_WRAPPERS_H
+#define TMPYL_WRAPPERS_H
 
-/*  The Python-C API is given here. The Python documentation recommends       *
+/*  The C-Python API is given here. The Python documentation recommends       *
  *  including Python.h before anything (even standard library headers).       */
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
