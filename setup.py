@@ -82,8 +82,6 @@ else:
         include = []
         tmpyl_macros = [("TMPYL_HAS_NUMPY", 0)]
 
-
-
 if os.name == "nt":
     include.append(".\\")
     os.chdir(".\\libtmpl")
@@ -98,9 +96,14 @@ else:
     libs = ["./libtmpl/libtmpl.a"]
     os.chdir("../")
 
-
 # List of files to be compiled for tmpyl.
 srclist = []
+
+for file in os.listdir("src/wrappers/"):
+
+    # Only add .c files.
+    if file[-1] == "c":
+        srclist.append("src/wrappers/%s" % file)
 
 for file in os.listdir("src/"):
 
@@ -109,7 +112,8 @@ for file in os.listdir("src/"):
         srclist.append("src/%s" % file)
 
 # Optional arguments for the compiler.
-optional_args = []
+optional_compiler_args = []
+optional_linker_args = []
 
 # Create the module.
 setup(
@@ -121,7 +125,8 @@ setup(
           Extension(
             'tmpyl',
             srclist,
-            extra_compile_args = optional_args,
+            extra_compile_args = optional_compiler_args,
+            extra_link_args = optional_linker_args,
             define_macros = tmpyl_macros,
             include_dirs = include,
             extra_objects = libs
