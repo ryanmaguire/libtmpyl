@@ -40,43 +40,4 @@ tmpl_Get_Py_Func_From_C(PyObject *self,
                         PyObject *args,
                         const tmpyl_GenericFunctionObj * const cfuncs);
 
-/*  All function wrappers for libtmpl.                                        */
-extern PyObject *tmpyl_abs(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_acos(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_asin(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_atan(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_airy_j1(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_bessel_i0(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_bessel_j0(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_bessel_j1(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_cbrt(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_ceil(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_cos(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_cosd(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_cosh(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_cospi(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_erf(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_exp(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_floor(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_fractional_part(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_fresnel_cos(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_fresnel_sin(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_lambertw(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_log(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_mod_2(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_mod_360(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_normalized_fresnel_cos(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_normalized_fresnel_sin(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_sin(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_sinc(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_sincpi(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_sind(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_sinh(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_sinpi(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_sqrt(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_tan(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_tanh(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_trunc(PyObject *self, PyObject *args);
-extern PyObject *tmpyl_unit_clamp(PyObject *self, PyObject *args);
-
 #endif
