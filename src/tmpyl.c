@@ -68,52 +68,17 @@
 #include "tmpyl_common.h"
 
 /*  The PyMethodDef structs for the functions are in their own header files.  */
-#include "tmpyl_abs_method.h"
-#include "tmpyl_acos_method.h"
-#include "tmpyl_asin_method.h"
-#include "tmpyl_atan_method.h"
-#include "tmpyl_airy_j1_method.h"
-#include "tmpyl_bessel_i0_method.h"
-#include "tmpyl_bessel_j0_method.h"
-#include "tmpyl_bessel_j1_method.h"
-#include "tmpyl_cbrt_method.h"
-#include "tmpyl_ceil_method.h"
-#include "tmpyl_cos_method.h"
-#include "tmpyl_cosd_method.h"
-#include "tmpyl_cosh_method.h"
-#include "tmpyl_cospi_method.h"
-#include "tmpyl_erf_method.h"
-#include "tmpyl_exp_method.h"
-#include "tmpyl_floor_method.h"
-#include "tmpyl_fractional_part_method.h"
-#include "tmpyl_fresnel_cos_method.h"
-#include "tmpyl_fresnel_sin_method.h"
-#include "tmpyl_lambertw_method.h"
-#include "tmpyl_log_method.h"
-#include "tmpyl_mod_2_method.h"
-#include "tmpyl_mod_360_method.h"
-#include "tmpyl_normalized_fresnel_cos_method.h"
-#include "tmpyl_normalized_fresnel_sin_method.h"
-#include "tmpyl_sin_method.h"
-#include "tmpyl_sinc_method.h"
-#include "tmpyl_sincpi_method.h"
-#include "tmpyl_sind_method.h"
-#include "tmpyl_sinh_method.h"
-#include "tmpyl_sinpi_method.h"
-#include "tmpyl_sqrt_method.h"
-#include "tmpyl_tan_method.h"
-#include "tmpyl_tanh_method.h"
-#include "tmpyl_trunc_method.h"
-#include "tmpyl_unit_clamp_method.h"
+#include "tmpyl_methods.h"
+#include "tmpyl_wrappers.h"
 
 /*  All of the methods of the tmpyl module are defined in this array.         */
 static PyMethodDef tmpyl_methods[] =
 {
     TMPYL_ABS_METHOD,
     TMPYL_ACOS_METHOD,
+    TMPYL_AIRY_J1_METHOD,
     TMPYL_ASIN_METHOD,
     TMPYL_ATAN_METHOD,
-    TMPYL_AIRY_J1_METHOD,
     TMPYL_BESSEL_I0_METHOD,
     TMPYL_BESSEL_J0_METHOD,
     TMPYL_BESSEL_J1_METHOD,

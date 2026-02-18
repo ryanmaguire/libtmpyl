@@ -40,6 +40,9 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
+#include "tmpyl_common.h"
+
+
 /*  All function wrappers for libtmpl.                                        */
 extern PyObject *tmpyl_abs(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_acos(PyObject *self, PyObject *args);
