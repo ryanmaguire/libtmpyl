@@ -42,7 +42,6 @@
 
 #include "tmpyl_common.h"
 
-
 /*  All function wrappers for libtmpl.                                        */
 extern PyObject *tmpyl_abs(PyObject *self, PyObject *args);
 extern PyObject *tmpyl_acos(PyObject *self, PyObject *args);

@@ -70,6 +70,8 @@
 /*  The PyMethodDef structs for the functions are in their own header files.  */
 #include "tmpyl_methods.h"
 #include "tmpyl_wrappers.h"
+#include "tmpyl_window_wrappers.h"
+#include "tmpyl_window_methods.h"
 
 /*  All of the methods of the tmpyl module are defined in this array.         */
 static PyMethodDef tmpyl_methods[] =
@@ -111,6 +113,7 @@ static PyMethodDef tmpyl_methods[] =
     TMPYL_TANH_METHOD,
     TMPYL_TRUNC_METHOD,
     TMPYL_UNIT_CLAMP_METHOD,
+    TMPYL_KBMD20_METHOD,
     {NULL, NULL, 0, NULL}
 };
 

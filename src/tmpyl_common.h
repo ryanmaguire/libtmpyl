@@ -35,9 +35,25 @@ typedef struct tmpyl_GenericFunctionObj_Def {
 
 } tmpyl_GenericFunctionObj;
 
+typedef struct tmpyl_WindowObj_Def {
+
+    /*  Real valued windows that take real arguments.                         */
+    tmpl_WindowFunctionFloat fwindow;
+    tmpl_WindowFunctionDouble dwindow;
+    tmpl_WindowFunctionLongDouble ldwindow;
+
+    /*  The name of the function.                                             */
+    const char *func_name;
+
+} tmpyl_WindowObj;
+
 extern PyObject *
 tmpl_Get_Py_Func_From_C(PyObject *self,
                         PyObject *args,
                         const tmpyl_GenericFunctionObj * const cfuncs);
 
+extern PyObject *
+tmpyl_window_wrapper(PyObject *self,
+                     PyObject *args,
+                     const tmpyl_WindowObj * const wfuncs);
 #endif
