@@ -193,6 +193,7 @@ def static_library_paths():
 
 add_directory(".")
 add_directory("wrappers")
+add_directory("window_wrappers")
 
 # Optional arguments for the compiler.
 static_libraries = static_library_paths()
