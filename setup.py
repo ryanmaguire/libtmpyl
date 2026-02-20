@@ -205,6 +205,8 @@ setup(
     version = '0.1',
     description = 'Python Extension Module for the C Library libtmpl',
     author = 'Ryan Maguire',
+    packages = [],
+    package_dir = {"": "."},
     ext_modules = [
           Extension(
             'tmpyl',
