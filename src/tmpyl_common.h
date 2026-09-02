@@ -11,24 +11,24 @@ typedef struct tmpyl_GenericFunctionObj_Def {
     tmpl_LongFunction l2l;
 
     /*  Real valued functions that take real arguments.                       */
-    tmpl_FloatFunction f2f;
-    tmpl_DoubleFunction d2d;
-    tmpl_LongDoubleFunction ld2ld;
+    tmpl_FunctionFloat f2f;
+    tmpl_FunctionDouble d2d;
+    tmpl_FunctionLongDouble ld2ld;
 
     /*  Real valued functions that take complex arguments.                    */
-    tmpl_ComplexFloatFunctional cf2f;
-    tmpl_ComplexDoubleFunctional cd2d;
-    tmpl_ComplexLongDoubleFunctional cld2ld;
+    tmpl_ComplexFunctionalFloat cf2f;
+    tmpl_ComplexFunctionalDouble cd2d;
+    tmpl_ComplexFunctionalLongDouble cld2ld;
 
     /*  Complex valued functions that take real arguments.                    */
-    tmpl_ComplexDoublePath d2cd;
-    tmpl_ComplexFloatPath f2cf;
-    tmpl_ComplexLongDoublePath ld2cld;
+    tmpl_ComplexPathFloat f2cf;
+    tmpl_ComplexPathDouble d2cd;
+    tmpl_ComplexPathLongDouble ld2cld;
 
     /*  Complex valued functions that take complex arguments.                 */
-    tmpl_ComplexFloatFunction cf2cf;
-    tmpl_ComplexDoubleFunction cd2cd;
-    tmpl_ComplexLongDoubleFunction cld2cld;
+    tmpl_ComplexFunctionFloat cf2cf;
+    tmpl_ComplexFunctionDouble cd2cd;
+    tmpl_ComplexFunctionLongDouble cld2cld;
 
     /*  The name of the function.                                             */
     const char *func_name;
