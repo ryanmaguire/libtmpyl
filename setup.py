@@ -159,6 +159,10 @@ def static_library_paths():
         if USE_OPENMP:
             cmake_args.append("-DOMP=ON")
 
+        # GCC and Clang can link small functions across translation units.
+        # This produces a very efficient library.
+        cmake_args.append("-DALWAYS_INLINE=ON")
+
         # Run CMake to generate the build files.
         subprocess.run(cmake_args, check = True)
 
@@ -174,11 +178,11 @@ def static_library_paths():
 
     # GNU Make is 'gmake' on FreeBSD. Check for this first.
     if shutil.which("gmake"):
-        command = ["gmake", libtmpl, "-j", "BUILD_STATIC=1"]
+        command = ["gmake", libtmpl, "-j", "ALWAYS_INLINE=1"]
 
     # GNU Make is simply 'make' on GNU / Linux and macOS.
     elif shutil.which("make"):
-        command = ["make", libtmpl, "-j", "BUILD_STATIC=1"]
+        command = ["make", libtmpl, "-j", "ALWAYS_INLINE=1"]
 
     else:
         raise RuntimeError("Neither CMake nor GNU Make found. Install one.")
